@@ -16,7 +16,6 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainFragment : Fragment() {
     private val viewModel: MainViewModel by viewModel()
-
     private val qiitaAdapter: QiitaInfoListAdapter by lazy {
         QiitaInfoListAdapter(requireContext())
     }

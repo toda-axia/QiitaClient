@@ -31,6 +31,7 @@ class QiitaClientApplication: Application() {
             single {
                 createApiService(QiitaClientService::class.java)
             }
+            factory { QiitaRepository(get()) }
         }
         startKoin {
             androidContext(this@QiitaClientApplication)

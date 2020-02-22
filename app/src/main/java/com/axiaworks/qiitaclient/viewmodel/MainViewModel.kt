@@ -8,13 +8,9 @@ import org.koin.core.KoinComponent
 import org.koin.core.inject
 
 class MainViewModel(private val app: Application): ViewModel(), KoinComponent {
-    //private val repository: QiitaRepository by inject()
-    private val repository: QiitaRepository by lazy {
-        QiitaRepository(app)
-    }
-
+    private val repository: QiitaRepository by inject()
     val searchTag = MutableLiveData<String>()
-    fun getArticle(tag: String?){
+    fun getArticle(tag: String?) {
         searchTag.value = tag
     }
     val qiitaInfoList: LiveData<List<QiitaInfo>> = Transformations.switchMap(searchTag){ tag ->
