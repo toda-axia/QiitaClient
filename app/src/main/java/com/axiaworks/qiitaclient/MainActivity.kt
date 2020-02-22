@@ -3,6 +3,8 @@ package com.axiaworks.qiitaclient
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import androidx.activity.viewModels
+import com.axiaworks.qiitaclient.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity() {
 
