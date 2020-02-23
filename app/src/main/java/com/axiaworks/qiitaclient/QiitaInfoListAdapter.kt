@@ -24,8 +24,7 @@ class QiitaInfoListAdapter(
     }
 
     override fun onBindViewHolder(holder: QiitaInfoViewHolder, position: Int) {
-        val data = qiitaInfoList[position]
-        holder.binding.qiitainfo = data
+        holder.binding.qiitainfo = qiitaInfoList[position]
     }
 
     inner class QiitaInfoViewHolder(var binding: QiitaItemBinding) : RecyclerView.ViewHolder(binding.root)
