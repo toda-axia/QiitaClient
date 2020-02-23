@@ -2,22 +2,25 @@ package com.axiaworks.qiitaclient
 
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.lifecycle.Observer
-import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.axiaworks.qiitaclient.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
-import kotlinx.android.synthetic.main.qiita_item.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainFragment : Fragment() {
     private val viewModel: MainViewModel by viewModel()
     private val qiitaAdapter: QiitaInfoListAdapter by lazy {
         QiitaInfoListAdapter(requireContext())
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        this.setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
@@ -35,11 +38,29 @@ class MainFragment : Fragment() {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = qiitaAdapter
         }
+    }
 
-        search_button.setOnClickListener {
-            viewModel.getArticle(search_tag_text.text.toString())
-            observeViewModel()
-        }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+
+        inflater.inflate(R.menu.menu_search, menu)
+
+        val searchMenuItem = menu.findItem(R.id.search_item)
+        val searchView = searchMenuItem.actionView as SearchView
+
+        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+            override fun onQueryTextChange(p0: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                p0?.let {
+                    viewModel.getArticle(it)
+                    observeViewModel()
+                }
+                return true
+            }
+        })
     }
 
     private fun observeViewModel() {
