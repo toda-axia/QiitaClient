@@ -43,7 +43,6 @@ class MainFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         viewModel.getRecentArticle()
-        //observeViewModel()
         viewModel.initialQiitaInfoList.observe(this, Observer { list ->
             list?.let {
                 qiitaAdapter.qiitaInfoList = it
@@ -61,12 +60,12 @@ class MainFragment : Fragment() {
         val searchView = searchMenuItem.actionView as SearchView
 
         searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
-            override fun onQueryTextChange(p0: String?): Boolean {
+            override fun onQueryTextChange(tag: String?): Boolean {
                 return false
             }
 
-            override fun onQueryTextSubmit(p0: String?): Boolean {
-                p0?.let {
+            override fun onQueryTextSubmit(tag: String?): Boolean {
+                tag?.let {
                     viewModel.getArticle(it)
                     observeViewModel()
                     text_search_word.text = viewModel.searchTag.value

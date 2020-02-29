@@ -22,16 +22,6 @@ class MainViewModel(private val app: Application): ViewModel(), KoinComponent {
         }
     }
 
-    //    val newsList = MutableLiveData<List<News>>()
-//
-//    fun getNews(searchWord: String?) {
-//        searchWord?.let {
-//            viewModelScope.launch {
-//                newsList.value = repository.getNews(searchWord)
-//            }
-//        }
-//    }
-
     val initialQiitaInfoList =  MutableLiveData<List<QiitaInfo>>()
     fun getRecentArticle() {
         viewModelScope.launch {

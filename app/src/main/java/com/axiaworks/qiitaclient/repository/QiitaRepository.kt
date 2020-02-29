@@ -11,7 +11,6 @@ import org.koin.core.inject
 
 class QiitaRepository(private val context: Context): KoinComponent {
     private val qiitaApiService: QiitaClientService by inject()
-
     val loadStatus = MutableLiveData<LoadStatus>()
 
     suspend fun getRecentArticle(): List<QiitaInfo> {
