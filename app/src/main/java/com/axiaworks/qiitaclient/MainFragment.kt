@@ -68,7 +68,7 @@ class MainFragment : Fragment() {
                 tag?.let {
                     viewModel.getArticle(it)
                     observeViewModel()
-                    text_search_word.text = viewModel.searchTag.value
+                    text_search_word.text = "検索ワード: ${viewModel.searchTag.value}"
                 }
                 return true
             }
