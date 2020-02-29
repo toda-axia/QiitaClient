@@ -40,6 +40,18 @@ class MainFragment : Fragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getRecentArticle()
+        //observeViewModel()
+        viewModel.initialQiitaInfoList.observe(this, Observer { list ->
+            list?.let {
+                qiitaAdapter.qiitaInfoList = it
+            }
+            qiitaAdapter.notifyDataSetChanged()
+        })
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
 
@@ -57,6 +69,7 @@ class MainFragment : Fragment() {
                 p0?.let {
                     viewModel.getArticle(it)
                     observeViewModel()
+                    text_search_word.text = viewModel.searchTag.value
                 }
                 return true
             }
@@ -65,7 +78,6 @@ class MainFragment : Fragment() {
 
     private fun observeViewModel() {
         viewModel.qiitaInfoList.observe(this, Observer { list ->
-            text_search_word.text = viewModel.searchTag.value
             list?.let {
                 qiitaAdapter.qiitaInfoList = it
             }

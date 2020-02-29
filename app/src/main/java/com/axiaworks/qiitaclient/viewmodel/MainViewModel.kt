@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.*
 import com.axiaworks.qiitaclient.data.QiitaInfo
 import com.axiaworks.qiitaclient.repository.QiitaRepository
+import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
@@ -18,6 +19,23 @@ class MainViewModel(private val app: Application): ViewModel(), KoinComponent {
             liveData {
                 emit(repository.getArticle(it))
             }
+        }
+    }
+
+    //    val newsList = MutableLiveData<List<News>>()
+//
+//    fun getNews(searchWord: String?) {
+//        searchWord?.let {
+//            viewModelScope.launch {
+//                newsList.value = repository.getNews(searchWord)
+//            }
+//        }
+//    }
+
+    val initialQiitaInfoList =  MutableLiveData<List<QiitaInfo>>()
+    fun getRecentArticle() {
+        viewModelScope.launch {
+            initialQiitaInfoList.value = repository.getRecentArticle()
         }
     }
 }
