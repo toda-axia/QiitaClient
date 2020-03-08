@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.MainActivity">
+    tools:context=".ui.QiitaArticleActivity">
 
     <fragment
-        android:id="@+id/fragment"
-        android:name="com.axiaworks.qiitaclient.ui.MainFragment"
+        android:id="@+id/fragment2"
+        android:name="com.axiaworks.qiitaclient.ui.QiitaArticleFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
