@@ -1,17 +1,16 @@
 package com.axiaworks.qiitaclient.ui
 
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.axiaworks.qiitaclient.data.QiitaInfo
 import com.axiaworks.qiitaclient.databinding.QiitaItemBinding
+import com.axiaworks.qiitaclient.viewmodel.MainViewModel
 
 class QiitaInfoListAdapter(
-    private val context: Context
+    private val context: Context,
+    private val viewModel: MainViewModel
 ): RecyclerView.Adapter<QiitaInfoListAdapter.QiitaInfoViewHolder>() {
     var qiitaInfoList: List<QiitaInfo> = emptyList()
 
@@ -31,7 +30,8 @@ class QiitaInfoListAdapter(
 
         holder.itemView.setOnClickListener {
             //context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(qiitaInfoList[position].url)))
-            context.startActivity(QiitaArticleActivity.callingIntent(context))
+            //context.startActivity(QiitaArticleActivity.callingIntent(context))
+            viewModel.setArticleUrl(qiitaInfoList[position].url)
         }
     }
 

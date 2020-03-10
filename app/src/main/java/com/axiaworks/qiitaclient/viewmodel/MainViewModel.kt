@@ -11,6 +11,7 @@ import org.koin.core.inject
 class MainViewModel(private val app: Application): ViewModel(), KoinComponent {
     private val repository: QiitaRepository by inject()
     val searchTag = MutableLiveData<String>()
+    val articleUrl: MutableLiveData<String> = MutableLiveData("")
     fun getArticle(tag: String?) {
         searchTag.value = tag
     }
@@ -27,5 +28,9 @@ class MainViewModel(private val app: Application): ViewModel(), KoinComponent {
         viewModelScope.launch {
             initialQiitaInfoList.value = repository.getRecentArticle()
         }
+    }
+
+    fun setArticleUrl(url: String) {
+        articleUrl.value = url
     }
 }

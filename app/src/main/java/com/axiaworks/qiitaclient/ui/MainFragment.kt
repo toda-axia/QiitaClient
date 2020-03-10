@@ -10,12 +10,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.axiaworks.qiitaclient.R
 import com.axiaworks.qiitaclient.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainFragment : Fragment() {
-    private val viewModel: MainViewModel by viewModel()
+    private val viewModel: MainViewModel by sharedViewModel()
     private val qiitaAdapter: QiitaInfoListAdapter by lazy {
-        QiitaInfoListAdapter(requireContext())
+        QiitaInfoListAdapter(requireContext(), viewModel)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,6 +50,12 @@ class MainFragment : Fragment() {
                 qiitaAdapter.qiitaInfoList = it
             }
             qiitaAdapter.notifyDataSetChanged()
+        })
+
+        viewModel.articleUrl.observe(this, Observer {
+            if (it != "") {
+                QiitaArticleFragment().show(requireFragmentManager(), "QiitaArticleFragment")
+            }
         })
     }
 

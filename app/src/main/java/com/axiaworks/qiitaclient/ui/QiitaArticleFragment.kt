@@ -1,26 +1,44 @@
 package com.axiaworks.qiitaclient.ui
 
+import android.app.AlertDialog
+import android.app.Dialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.DialogFragment
 import com.axiaworks.qiitaclient.R
-import kotlinx.android.synthetic.main.fragment_qiita_article.*
+import com.axiaworks.qiitaclient.databinding.FragmentQiitaArticleBinding
+import com.axiaworks.qiitaclient.viewmodel.MainViewModel
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 
-class QiitaArticleFragment : Fragment() {
+class QiitaArticleFragment : DialogFragment() {
+    private lateinit var binding: FragmentQiitaArticleBinding
+    private val viewModel: MainViewModel by sharedViewModel()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_qiita_article, container, false)
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        binding = DataBindingUtil.inflate(
+            LayoutInflater.from(context),
+            R.layout.fragment_qiita_article,
+            null,
+            false
+        )
+        return Dialog(requireContext()).apply {
+            setContentView(binding.root)
+            window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
 
-        article_view.loadUrl("https://www.google.com/")
+        binding.articleView.loadUrl(viewModel.articleUrl.value!!)
     }
+
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//
+//        binding.articleView.loadUrl("https://www.google.com/")
+//    }
 }
