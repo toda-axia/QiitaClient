@@ -29,8 +29,6 @@ class QiitaInfoListAdapter(
         holder.binding.qiitainfo = qiitaInfoList[position]
 
         holder.itemView.setOnClickListener {
-            //context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(qiitaInfoList[position].url)))
-            //context.startActivity(QiitaArticleActivity.callingIntent(context))
             viewModel.setArticleUrl(qiitaInfoList[position].url)
         }
     }

@@ -11,7 +11,6 @@ import com.axiaworks.qiitaclient.R
 import com.axiaworks.qiitaclient.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
-import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainFragment : Fragment() {
     private val viewModel: MainViewModel by sharedViewModel()
