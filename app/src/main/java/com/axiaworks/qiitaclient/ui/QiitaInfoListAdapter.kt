@@ -1,12 +1,14 @@
 package com.axiaworks.qiitaclient.ui
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.axiaworks.qiitaclient.data.QiitaInfo
 import com.axiaworks.qiitaclient.databinding.QiitaItemBinding
 import com.axiaworks.qiitaclient.viewmodel.MainViewModel
+import com.bumptech.glide.Glide
 
 class QiitaInfoListAdapter(
     private val context: Context,
@@ -27,6 +29,11 @@ class QiitaInfoListAdapter(
 
     override fun onBindViewHolder(holder: QiitaInfoViewHolder, position: Int) {
         holder.binding.qiitainfo = qiitaInfoList[position]
+
+        qiitaInfoList[position].qiitaUser.profile_image_url?.let {
+            Log.d("デバッグ", qiitaInfoList[position].qiitaUser.profile_image_url)
+            Glide.with(context).load(qiitaInfoList[position].qiitaUser.profile_image_url).into(holder.binding.userImageView)
+        }
 
         holder.itemView.setOnClickListener {
             viewModel.setArticleUrl(qiitaInfoList[position].url)
