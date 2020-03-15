@@ -31,7 +31,6 @@ class QiitaInfoListAdapter(
         holder.binding.qiitainfo = qiitaInfoList[position]
 
         qiitaInfoList[position].qiitaUser.profile_image_url?.let {
-            Log.d("デバッグ", qiitaInfoList[position].qiitaUser.profile_image_url)
             Glide.with(context).load(qiitaInfoList[position].qiitaUser.profile_image_url).into(holder.binding.userImageView)
         }
 
