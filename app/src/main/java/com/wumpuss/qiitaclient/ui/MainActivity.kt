@@ -1,10 +1,9 @@
-package com.axiaworks.qiitaclient.ui
+package com.wumpuss.qiitaclient.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.Observer
-import com.axiaworks.qiitaclient.R
-import com.axiaworks.qiitaclient.viewmodel.MainViewModel
+import com.wumpuss.qiitaclient.R
+import com.wumpuss.qiitaclient.viewmodel.MainViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {

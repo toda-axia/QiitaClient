@@ -1,4 +1,4 @@
-package com.axiaworks.qiitaclient.data
+package com.wumpuss.qiitaclient.data
 
 import com.squareup.moshi.Json
 

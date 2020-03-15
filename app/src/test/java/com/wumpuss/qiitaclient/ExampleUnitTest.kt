@@ -1,4 +1,4 @@
-package com.axiaworks.qiitaclient
+package com.wumpuss.qiitaclient
 
 import org.junit.Test
 

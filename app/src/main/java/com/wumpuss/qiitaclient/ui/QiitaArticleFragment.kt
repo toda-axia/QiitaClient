@@ -1,4 +1,4 @@
-package com.axiaworks.qiitaclient.ui
+package com.wumpuss.qiitaclient.ui
 
 import android.app.Dialog
 import android.os.Bundle
@@ -6,9 +6,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
-import com.axiaworks.qiitaclient.R
-import com.axiaworks.qiitaclient.databinding.FragmentQiitaArticleBinding
-import com.axiaworks.qiitaclient.viewmodel.MainViewModel
+import com.wumpuss.qiitaclient.R
+import com.wumpuss.qiitaclient.databinding.FragmentQiitaArticleBinding
+import com.wumpuss.qiitaclient.viewmodel.MainViewModel
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class QiitaArticleFragment : DialogFragment() {

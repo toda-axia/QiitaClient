@@ -1,8 +1,8 @@
-package com.axiaworks.qiitaclient
+package com.wumpuss.qiitaclient
 
 import android.app.Application
-import com.axiaworks.qiitaclient.repository.QiitaRepository
-import com.axiaworks.qiitaclient.viewmodel.MainViewModel
+import com.wumpuss.qiitaclient.repository.QiitaRepository
+import com.wumpuss.qiitaclient.viewmodel.MainViewModel
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import org.koin.android.ext.koin.androidContext
