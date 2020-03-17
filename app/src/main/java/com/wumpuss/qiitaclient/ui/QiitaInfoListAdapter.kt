@@ -1,7 +1,6 @@
 package com.wumpuss.qiitaclient.ui
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -31,7 +30,6 @@ class QiitaInfoListAdapter(
         holder.binding.qiitainfo = qiitaInfoList[position]
 
         qiitaInfoList[position].qiitaUser.profile_image_url?.let {
-            Log.d("デバッグ", qiitaInfoList[position].qiitaUser.profile_image_url)
             Glide.with(context).load(qiitaInfoList[position].qiitaUser.profile_image_url).into(holder.binding.userImageView)
         }
 
