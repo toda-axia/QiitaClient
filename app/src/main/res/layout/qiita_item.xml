@@ -5,7 +5,7 @@
     <data>
         <variable
             name="qiitainfo"
-            type="com.axiaworks.qiitaclient.data.QiitaInfo" />
+            type="com.wumpuss.qiitaclient.data.QiitaInfo" />
     </data>
 
     <LinearLayout

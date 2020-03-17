@@ -1,9 +1,9 @@
-package com.axiaworks.qiitaclient.viewmodel
+package com.wumpuss.qiitaclient.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.*
-import com.axiaworks.qiitaclient.data.QiitaInfo
-import com.axiaworks.qiitaclient.repository.QiitaRepository
+import com.wumpuss.qiitaclient.data.QiitaInfo
+import com.wumpuss.qiitaclient.repository.QiitaRepository
 import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
 import org.koin.core.inject

@@ -1,4 +1,4 @@
-package com.axiaworks.qiitaclient.ui
+package com.wumpuss.qiitaclient.ui
 
 
 import android.os.Bundle
@@ -7,8 +7,8 @@ import androidx.fragment.app.Fragment
 import android.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.axiaworks.qiitaclient.R
-import com.axiaworks.qiitaclient.viewmodel.MainViewModel
+import com.wumpuss.qiitaclient.R
+import com.wumpuss.qiitaclient.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.fragment_main.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 

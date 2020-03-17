@@ -1,11 +1,11 @@
-package com.axiaworks.qiitaclient.repository
+package com.wumpuss.qiitaclient.repository
 
 import android.content.Context
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
-import com.axiaworks.qiitaclient.QiitaClientService
-import com.axiaworks.qiitaclient.data.QiitaInfo
-import com.axiaworks.qiitaclient.utils.LoadStatus
+import com.wumpuss.qiitaclient.QiitaClientService
+import com.wumpuss.qiitaclient.data.QiitaInfo
+import com.wumpuss.qiitaclient.utils.LoadStatus
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 

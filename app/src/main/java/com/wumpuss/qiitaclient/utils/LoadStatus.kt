@@ -1,4 +1,4 @@
-package com.axiaworks.qiitaclient.utils
+package com.wumpuss.qiitaclient.utils
 
 enum class LoadStatus {
     LOADING,

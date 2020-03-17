@@ -1,13 +1,13 @@
-package com.axiaworks.qiitaclient.ui
+package com.wumpuss.qiitaclient.ui
 
 import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.axiaworks.qiitaclient.data.QiitaInfo
-import com.axiaworks.qiitaclient.databinding.QiitaItemBinding
-import com.axiaworks.qiitaclient.viewmodel.MainViewModel
+import com.wumpuss.qiitaclient.data.QiitaInfo
+import com.wumpuss.qiitaclient.databinding.QiitaItemBinding
+import com.wumpuss.qiitaclient.viewmodel.MainViewModel
 import com.bumptech.glide.Glide
 
 class QiitaInfoListAdapter(

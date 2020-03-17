@@ -1,6 +1,6 @@
-package com.axiaworks.qiitaclient
+package com.wumpuss.qiitaclient
 
-import com.axiaworks.qiitaclient.data.QiitaInfo
+import com.wumpuss.qiitaclient.data.QiitaInfo
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

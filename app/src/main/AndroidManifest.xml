@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.axiaworks.qiitaclient">
+    package="com.wumpuss.qiitaclient">
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".QiitaClientApplication"
+        android:name="com.wumpuss.qiitaclient.QiitaClientApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.QiitaArticleActivity"></activity>
-        <activity android:name=".ui.MainActivity">
+        <activity android:name="com.wumpuss.qiitaclient.ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
