@@ -36,7 +36,6 @@ class QiitaRepository(private val context: Context): KoinComponent {
 
     suspend fun getArticle(searchTag: String): List<QiitaInfo> {
         var returnList = emptyList<QiitaInfo>()
-        //var loadStatus = MutableLiveData<LoadStatus>()
 
         runCatching {
             qiitaApiService.getItemsByTag(searchTag)
