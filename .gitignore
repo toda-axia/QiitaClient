@@ -8,8 +8,12 @@
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
 /.idea/misc.xml
+/.idea/dictionaries
 .DS_Store
 /build
 /captures
 .externalNativeBuild
 .cxx
+
+app-release.aab
+upload-keystore.jks
