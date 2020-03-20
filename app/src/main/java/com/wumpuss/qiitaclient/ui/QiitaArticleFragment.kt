@@ -22,6 +22,7 @@ class QiitaArticleFragment : DialogFragment() {
             null,
             false
         )
+
         return Dialog(requireContext()).apply {
             setContentView(binding.root)
             window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
@@ -31,6 +32,6 @@ class QiitaArticleFragment : DialogFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        binding.articleView.loadUrl(viewModel.articleUrl.value!!)
+        binding.articleView.loadUrl(viewModel.articleUrl)
     }
 }

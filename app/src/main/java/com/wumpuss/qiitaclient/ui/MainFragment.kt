@@ -15,7 +15,10 @@ import org.koin.android.viewmodel.ext.android.sharedViewModel
 class MainFragment : Fragment() {
     private val viewModel: MainViewModel by sharedViewModel()
     private val qiitaAdapter: QiitaInfoListAdapter by lazy {
-        QiitaInfoListAdapter(requireContext(), viewModel)
+        QiitaInfoListAdapter(requireContext()) {
+            viewModel.articleUrl = it
+            QiitaArticleFragment().show(parentFragmentManager, "QiitaArticleFragment")
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +31,6 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_main, container, false)
     }
 
@@ -49,12 +51,6 @@ class MainFragment : Fragment() {
                 qiitaAdapter.qiitaInfoList = it
             }
             qiitaAdapter.notifyDataSetChanged()
-        })
-
-        viewModel.articleUrl.observe(this, Observer {
-            if (it != "") {
-                QiitaArticleFragment().show(requireFragmentManager(), "QiitaArticleFragment")
-            }
         })
     }
 

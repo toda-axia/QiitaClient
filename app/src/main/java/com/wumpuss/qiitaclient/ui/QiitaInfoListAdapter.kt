@@ -6,12 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.wumpuss.qiitaclient.data.QiitaInfo
 import com.wumpuss.qiitaclient.databinding.QiitaItemBinding
-import com.wumpuss.qiitaclient.viewmodel.MainViewModel
 import com.bumptech.glide.Glide
 
 class QiitaInfoListAdapter(
     private val context: Context,
-    private val viewModel: MainViewModel
+    private val listener : (String) -> Unit
 ): RecyclerView.Adapter<QiitaInfoListAdapter.QiitaInfoViewHolder>() {
     var qiitaInfoList: List<QiitaInfo> = emptyList()
 
@@ -34,7 +33,7 @@ class QiitaInfoListAdapter(
         }
 
         holder.itemView.setOnClickListener {
-            viewModel.setArticleUrl(qiitaInfoList[position].url)
+            listener.invoke(qiitaInfoList[position].url)
         }
     }
 
