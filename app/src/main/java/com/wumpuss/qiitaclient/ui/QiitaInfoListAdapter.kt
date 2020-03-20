@@ -1,7 +1,9 @@
 package com.wumpuss.qiitaclient.ui
 
 import android.content.Context
+import android.os.Handler
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.wumpuss.qiitaclient.data.QiitaInfo
@@ -13,6 +15,9 @@ class QiitaInfoListAdapter(
     private val listener : (String) -> Unit
 ): RecyclerView.Adapter<QiitaInfoListAdapter.QiitaInfoViewHolder>() {
     var qiitaInfoList: List<QiitaInfo> = emptyList()
+    companion object {
+        private const val CLICKABLE_DELAY_TIME = 100L
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QiitaInfoViewHolder {
         val layoutInflater = LayoutInflater.from(context)
@@ -32,10 +37,26 @@ class QiitaInfoListAdapter(
             Glide.with(context).load(qiitaInfoList[position].qiitaUser.profile_image_url).into(holder.binding.userImageView)
         }
 
-        holder.itemView.setOnClickListener {
+        holder.itemView.setSafeClickListener {
             listener.invoke(qiitaInfoList[position].url)
         }
     }
+
+    @Suppress("UNCHECKED_CAST")
+    fun <T: View> T.setSafeClickListener(listener: (it: T) -> Unit) {
+        setOnClickListener { view ->
+            if (view == null) return@setOnClickListener
+            view.isEnabled = false
+
+            Handler().postDelayed(
+                { view.isEnabled = true },
+                CLICKABLE_DELAY_TIME
+            )
+
+            listener.invoke(view as T)
+        }
+    }
+
 
     inner class QiitaInfoViewHolder(var binding: QiitaItemBinding) : RecyclerView.ViewHolder(binding.root)
 }
