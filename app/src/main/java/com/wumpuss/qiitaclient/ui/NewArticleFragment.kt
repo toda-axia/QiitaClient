@@ -4,15 +4,14 @@ package com.wumpuss.qiitaclient.ui
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import android.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.wumpuss.qiitaclient.R
 import com.wumpuss.qiitaclient.viewmodel.MainViewModel
-import kotlinx.android.synthetic.main.fragment_main.*
+import kotlinx.android.synthetic.main.fragment_new_article.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
-class MainFragment : Fragment() {
+class NewArticleFragment : Fragment() {
     private val viewModel: MainViewModel by sharedViewModel()
     private val qiitaAdapter: QiitaInfoListAdapter by lazy {
         QiitaInfoListAdapter(requireContext()) {
@@ -31,7 +30,7 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_main, container, false)
+        return inflater.inflate(R.layout.fragment_new_article, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -54,36 +53,36 @@ class MainFragment : Fragment() {
         })
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
+//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+//        super.onCreateOptionsMenu(menu, inflater)
+//
+//        inflater.inflate(R.menu.menu_search, menu)
+//
+//        val searchMenuItem = menu.findItem(R.id.search_item)
+//        val searchView = searchMenuItem.actionView as SearchView
+//
+//        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+//            override fun onQueryTextChange(tag: String?): Boolean {
+//                return false
+//            }
+//
+//            override fun onQueryTextSubmit(tag: String?): Boolean {
+//                tag?.let {
+//                    viewModel.getArticle(it)
+//                    observeViewModel()
+//                    //text_search_word.text = "検索ワード: ${viewModel.searchTag.value}"
+//                }
+//                return true
+//            }
+//        })
+//    }
 
-        inflater.inflate(R.menu.menu_search, menu)
-
-        val searchMenuItem = menu.findItem(R.id.search_item)
-        val searchView = searchMenuItem.actionView as SearchView
-
-        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
-            override fun onQueryTextChange(tag: String?): Boolean {
-                return false
-            }
-
-            override fun onQueryTextSubmit(tag: String?): Boolean {
-                tag?.let {
-                    viewModel.getArticle(it)
-                    observeViewModel()
-                    text_search_word.text = "検索ワード: ${viewModel.searchTag.value}"
-                }
-                return true
-            }
-        })
-    }
-
-    private fun observeViewModel() {
-        viewModel.qiitaInfoList.observe(this, Observer { list ->
-            list?.let {
-                qiitaAdapter.qiitaInfoList = it
-            }
-            qiitaAdapter.notifyDataSetChanged()
-        })
-    }
+//    private fun observeViewModel() {
+//        viewModel.qiitaInfoList.observe(this, Observer { list ->
+//            list?.let {
+//                qiitaAdapter.qiitaInfoList = it
+//            }
+//            qiitaAdapter.notifyDataSetChanged()
+//        })
+//    }
 }
