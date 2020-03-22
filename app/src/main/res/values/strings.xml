@@ -2,7 +2,10 @@
     <string name="app_name">QiitaClient</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="search_word">検索ワード:</string>
-    <string name="search">検索</string>
+    <string name="search_word">検索タグ:</string>
+    <string name="please_input_search_tag">検索タグを入力してください。</string>
     <string name="recent_article">最新の記事</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

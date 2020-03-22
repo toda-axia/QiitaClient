@@ -52,8 +52,8 @@ class QiitaPagerAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
     override fun createFragment(position: Int): Fragment {
         return when (position) {
             0 -> NewArticleFragment()
-            1 -> NewArticleFragment()
-            2 -> NewArticleFragment()
+            1 -> SearchArticleFragment()
+            2 -> BookmarkArticleFragment()
             else -> NewArticleFragment()
         }
     }

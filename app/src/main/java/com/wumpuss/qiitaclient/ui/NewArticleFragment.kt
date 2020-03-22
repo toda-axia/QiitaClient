@@ -20,12 +20,6 @@ class NewArticleFragment : Fragment() {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        this.setHasOptionsMenu(true)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,7 +30,7 @@ class NewArticleFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        with(qiita_title_list) {
+        with(new_title_list) {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = qiitaAdapter
         }
