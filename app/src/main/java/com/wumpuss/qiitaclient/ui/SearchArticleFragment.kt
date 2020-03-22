@@ -17,9 +17,8 @@ import org.koin.android.viewmodel.ext.android.sharedViewModel
 class SearchArticleFragment : Fragment() {
     private val viewModel: MainViewModel by sharedViewModel()
     private val qiitaAdapter: QiitaInfoListAdapter by lazy {
-        QiitaInfoListAdapter(requireContext()) {
-            viewModel.articleUrl = it
-            QiitaArticleFragment().show(parentFragmentManager, "QiitaArticleFragment")
+        QiitaInfoListAdapter(requireContext()) { url ->
+            startActivity(QiitaContentActivity.callingIntent(requireContext(), url))
         }
     }
 
