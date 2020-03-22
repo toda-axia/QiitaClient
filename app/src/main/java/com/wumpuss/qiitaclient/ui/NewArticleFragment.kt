@@ -45,37 +45,4 @@ class NewArticleFragment : Fragment() {
             qiitaAdapter.notifyDataSetChanged()
         })
     }
-
-//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//        super.onCreateOptionsMenu(menu, inflater)
-//
-//        inflater.inflate(R.menu.menu_search, menu)
-//
-//        val searchMenuItem = menu.findItem(R.id.search_item)
-//        val searchView = searchMenuItem.actionView as SearchView
-//
-//        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
-//            override fun onQueryTextChange(tag: String?): Boolean {
-//                return false
-//            }
-//
-//            override fun onQueryTextSubmit(tag: String?): Boolean {
-//                tag?.let {
-//                    viewModel.getArticle(it)
-//                    observeViewModel()
-//                    //text_search_word.text = "検索ワード: ${viewModel.searchTag.value}"
-//                }
-//                return true
-//            }
-//        })
-//    }
-
-//    private fun observeViewModel() {
-//        viewModel.qiitaInfoList.observe(this, Observer { list ->
-//            list?.let {
-//                qiitaAdapter.qiitaInfoList = it
-//            }
-//            qiitaAdapter.notifyDataSetChanged()
-//        })
-//    }
 }
