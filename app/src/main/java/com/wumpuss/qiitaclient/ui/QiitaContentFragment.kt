@@ -22,11 +22,6 @@ class QiitaContentFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_qiita_content, container, false)
     }
 
-//    override fun onResume() {
-//        super.onResume()
-//        content_view.loadUrl(viewModel.articleUrl)
-//    }
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
