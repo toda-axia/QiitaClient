@@ -16,7 +16,7 @@ class NewArticleFragment : Fragment() {
     private val qiitaAdapter: QiitaInfoListAdapter by lazy {
         QiitaInfoListAdapter(requireContext()) {
             viewModel.articleUrl = it
-            QiitaArticleFragment().show(parentFragmentManager, "QiitaArticleFragment")
+            startActivity(QiitaContentActivity.callingIntent(requireContext()))
         }
     }
 
