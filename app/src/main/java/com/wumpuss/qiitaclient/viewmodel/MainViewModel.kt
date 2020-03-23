@@ -29,4 +29,10 @@ class MainViewModel(private val app: Application): ViewModel(), KoinComponent {
             initialQiitaInfoList.value = repository.getRecentArticle()
         }
     }
+
+    fun saveArticle(qiitaInfo: QiitaInfo) {
+        viewModelScope.launch {
+            repository.saveArticle(qiitaInfo)
+        }
+    }
 }

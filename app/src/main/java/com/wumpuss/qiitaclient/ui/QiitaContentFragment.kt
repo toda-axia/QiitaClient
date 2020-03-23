@@ -30,5 +30,10 @@ class QiitaContentFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_content, menu)
+
+        val addMenuItem = menu.findItem(R.id.munu_add)
+        addMenuItem.setOnMenuItemClickListener {
+            viewModel.saveArticle(viewModel.)
+        }
     }
 }

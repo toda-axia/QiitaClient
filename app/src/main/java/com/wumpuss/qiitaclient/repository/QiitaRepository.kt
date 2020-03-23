@@ -5,12 +5,14 @@ import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.wumpuss.qiitaclient.QiitaClientService
 import com.wumpuss.qiitaclient.data.QiitaInfo
+import com.wumpuss.qiitaclient.db.QiitaDatabase
 import com.wumpuss.qiitaclient.utils.LoadStatus
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
 class QiitaRepository(private val context: Context): KoinComponent {
     private val qiitaApiService: QiitaClientService by inject()
+    private val qiitaDb: QiitaDatabase by inject()
     val loadStatus = MutableLiveData<LoadStatus>()
 
     suspend fun getRecentArticle(): List<QiitaInfo> {
@@ -53,5 +55,9 @@ class QiitaRepository(private val context: Context): KoinComponent {
         }
 
         return returnList
+    }
+
+    suspend fun saveArticle(qiitaInfo: QiitaInfo) {
+        qiitaDb.QiitaInfoDao().insert(qiitaInfo)
     }
 }
