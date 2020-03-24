@@ -1,10 +1,13 @@
 package com.wumpuss.qiitaclient
 
 import android.app.Application
+import android.content.Context
+import androidx.room.Room
 import com.wumpuss.qiitaclient.repository.QiitaRepository
 import com.wumpuss.qiitaclient.viewmodel.MainViewModel
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.wumpuss.qiitaclient.db.QiitaBookmarkDatabase
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.android.viewmodel.dsl.viewModel
@@ -30,6 +33,9 @@ class QiitaClientApplication: Application() {
             single {
                 createApiService(QiitaClientService::class.java)
             }
+            single {
+                createDataBase(get())
+            }
             factory { QiitaRepository(get()) }
         }
         startKoin {
@@ -49,4 +55,14 @@ class QiitaClientApplication: Application() {
             ))
             .build()
             .create(service)
+
+    private fun createDataBase(context: Context): QiitaBookmarkDatabase {
+        return Room.databaseBuilder(
+            context,
+            QiitaBookmarkDatabase::class.java,
+            "qiita-client-database"
+        )
+            .allowMainThreadQueries()
+            .build()
+    }
 }
