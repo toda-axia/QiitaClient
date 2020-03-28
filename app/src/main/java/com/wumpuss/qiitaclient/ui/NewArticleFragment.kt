@@ -5,6 +5,7 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.wumpuss.qiitaclient.R
+import com.wumpuss.qiitaclient.utils.LoadStatus
 import com.wumpuss.qiitaclient.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.fragment_new_article.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
@@ -40,10 +41,23 @@ class NewArticleFragment : Fragment() {
             }
             qiitaAdapter.notifyDataSetChanged()
         })
+
+        bindViews()
     }
 
     override fun onResume() {
         super.onResume()
         viewModel.getRecentArticle()
+    }
+
+    private fun bindViews() {
+        viewModel.loadProgressStatus.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                when (it) {
+                    LoadStatus.LOADING -> load_progress_container.visibility = View.VISIBLE
+                    LoadStatus.LOADED -> load_progress_container.visibility = View.GONE
+                }
+            }
+        })
     }
 }

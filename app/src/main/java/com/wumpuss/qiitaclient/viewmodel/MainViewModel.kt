@@ -39,11 +39,11 @@ class MainViewModel(private val app: Application): ViewModel(), KoinComponent {
     }
 
     fun getRecentArticle() {
-        loadProgressStatus.value = LoadStatus.LOADING
         viewModelScope.launch {
+            loadProgressStatus.value = LoadStatus.LOADING
             initialQiitaInfoList.value = repository.getRecentArticle()
+            loadProgressStatus.value = LoadStatus.LOADED
         }
-        loadProgressStatus.value = LoadStatus.LOADED
     }
 
     fun getBookmarks() {
