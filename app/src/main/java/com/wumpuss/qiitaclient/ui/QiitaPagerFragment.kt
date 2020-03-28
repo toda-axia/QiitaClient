@@ -8,18 +8,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
-
 import com.wumpuss.qiitaclient.R
+import com.wumpuss.qiitaclient.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.fragment_qiita_pager.*
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class QiitaPagerFragment : Fragment() {
-    companion object {
-        private val tabArray = arrayListOf(
-            "新着記事",
-            "記事検索",
-            "保存した記事"
-        )
-    }
+    private val viewModel: MainViewModel by sharedViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,22 +27,25 @@ class QiitaPagerFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        val tabArray = arrayListOf(
+            getString(R.string.new_articles),
+            getString(R.string.search_articles),
+            getString(R.string.bookmark_articles)
+        )
+
         activity?.let {
-            qiita_pager.adapter = QiitaPagerAdapter(it)
+            qiita_pager.adapter = QiitaPagerAdapter(it, tabArray)
         }
 
         TabLayoutMediator(qiita_tabs, qiita_pager) { tab, position ->
             tab.text = tabArray[position]
         }.attach()
+
     }
 }
 
-class QiitaPagerAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
-    companion object {
-        const val NUM_PAGES = 3
-    }
-
-    override fun getItemCount(): Int = NUM_PAGES
+class QiitaPagerAdapter(fa: FragmentActivity, private val tabs: List<String>) : FragmentStateAdapter(fa) {
+    override fun getItemCount(): Int = tabs.size
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {

@@ -6,11 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
-
 import com.wumpuss.qiitaclient.R
 import com.wumpuss.qiitaclient.viewmodel.MainViewModel
-import kotlinx.android.synthetic.main.fragment_new_article.*
 import kotlinx.android.synthetic.main.fragment_search_article.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
@@ -38,11 +35,7 @@ class SearchArticleFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        with(search_title_list) {
-            layoutManager = LinearLayoutManager(requireContext())
-            adapter = qiitaAdapter
-        }
-
+        search_title_list.adapter = qiitaAdapter
         search_button.setOnClickListener {
             viewModel.getArticle(input_search_tag.text.toString())
             observeViewModel()

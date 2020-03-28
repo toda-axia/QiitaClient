@@ -5,6 +5,7 @@ import androidx.lifecycle.*
 import com.wumpuss.qiitaclient.data.QiitaBookmark
 import com.wumpuss.qiitaclient.data.QiitaInfo
 import com.wumpuss.qiitaclient.repository.QiitaRepository
+import com.wumpuss.qiitaclient.utils.LoadStatus
 import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -14,6 +15,7 @@ class MainViewModel(private val app: Application): ViewModel(), KoinComponent {
     val searchTag = MutableLiveData<String>()
     val initialQiitaInfoList =  MutableLiveData<List<QiitaInfo>>()
     val bookmarkQiitaList = MutableLiveData<List<QiitaBookmark>>()
+    val loadProgressStatus = MutableLiveData<LoadStatus>()
     var id = ""
     var title = ""
     var url = ""
@@ -37,9 +39,11 @@ class MainViewModel(private val app: Application): ViewModel(), KoinComponent {
     }
 
     fun getRecentArticle() {
+        loadProgressStatus.value = LoadStatus.LOADING
         viewModelScope.launch {
             initialQiitaInfoList.value = repository.getRecentArticle()
         }
+        loadProgressStatus.value = LoadStatus.LOADED
     }
 
     fun getBookmarks() {
