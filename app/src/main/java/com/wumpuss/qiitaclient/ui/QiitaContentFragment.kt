@@ -5,6 +5,7 @@ import android.view.*
 import androidx.fragment.app.Fragment
 
 import com.wumpuss.qiitaclient.R
+import com.wumpuss.qiitaclient.data.QiitaBookmark
 import com.wumpuss.qiitaclient.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.fragment_qiita_content.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
@@ -24,7 +25,14 @@ class QiitaContentFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        content_view.loadUrl(viewModel.articleUrl)
+        content_view.loadUrl(viewModel.url)
+
+        viewModel.insertBookmark(QiitaBookmark(
+            viewModel.id,
+            viewModel.title,
+            viewModel.url,
+            viewModel.profileImage
+        ))
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

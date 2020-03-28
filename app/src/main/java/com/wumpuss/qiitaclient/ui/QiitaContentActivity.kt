@@ -10,10 +10,16 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class QiitaContentActivity : AppCompatActivity() {
     companion object {
+        private const val INTENT_EXTRA_ID = "INTENT_EXTRA_ID"
+        private const val INTENT_EXTRA_TITLE = "INTENT_EXTRA_TITLE"
         private const val INTENT_EXTRA_URL = "INTENT_EXTRA_URL"
-        fun callingIntent(context: Context, url: String) :Intent {
+        private const val INTENT_EXTRA_PROFILE_IMAGE = "INTENT_PROFILE_IMAGE"
+        fun callingIntent(context: Context, id: String, title: String, url: String, profileImage: String) :Intent {
             val intent = Intent(context, QiitaContentActivity::class.java)
+            intent.putExtra(INTENT_EXTRA_ID, id)
+            intent.putExtra(INTENT_EXTRA_TITLE, title)
             intent.putExtra(INTENT_EXTRA_URL, url)
+            intent.putExtra(INTENT_EXTRA_PROFILE_IMAGE, profileImage)
             return intent
         }
     }
@@ -22,7 +28,11 @@ class QiitaContentActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel.articleUrl = intent.getStringExtra(INTENT_EXTRA_URL)
+        viewModel.id = intent.getStringExtra(INTENT_EXTRA_ID)!!
+        viewModel.title = intent.getStringExtra(INTENT_EXTRA_TITLE)!!
+        viewModel.url = intent.getStringExtra(INTENT_EXTRA_URL)!!
+        viewModel.profileImage = intent.getStringExtra(INTENT_EXTRA_PROFILE_IMAGE)!!
+
         setContentView(R.layout.activity_qiita_content)
     }
 }

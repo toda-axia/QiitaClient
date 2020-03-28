@@ -17,8 +17,13 @@ import org.koin.android.viewmodel.ext.android.sharedViewModel
 class SearchArticleFragment : Fragment() {
     private val viewModel: MainViewModel by sharedViewModel()
     private val qiitaAdapter: QiitaInfoListAdapter by lazy {
-        QiitaInfoListAdapter(requireContext()) { url ->
-            startActivity(QiitaContentActivity.callingIntent(requireContext(), url))
+        QiitaInfoListAdapter(requireContext()) { bookmark ->
+            startActivity(QiitaContentActivity.callingIntent(
+                requireContext(),
+                bookmark.id,
+                bookmark.title,
+                bookmark.url,
+                bookmark.profileImage))
         }
     }
 

@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 @Entity
 data class QiitaBookmark (
     @PrimaryKey
-    val id: Int,
+    val id: String,
     val title: String,
     val url: String,
     val profileImage: String

@@ -4,7 +4,9 @@ import android.content.Context
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.wumpuss.qiitaclient.QiitaClientService
+import com.wumpuss.qiitaclient.data.QiitaBookmark
 import com.wumpuss.qiitaclient.data.QiitaInfo
+import com.wumpuss.qiitaclient.db.QiitaBookmarkDatabase
 import com.wumpuss.qiitaclient.utils.LoadStatus
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -12,6 +14,7 @@ import org.koin.core.inject
 class QiitaRepository(private val context: Context): KoinComponent {
     private val qiitaApiService: QiitaClientService by inject()
     val loadStatus = MutableLiveData<LoadStatus>()
+    private val qiitaBookmarkDb: QiitaBookmarkDatabase by inject()
 
     suspend fun getRecentArticle(): List<QiitaInfo> {
         var returnList = emptyList<QiitaInfo>()
@@ -53,5 +56,9 @@ class QiitaRepository(private val context: Context): KoinComponent {
         }
 
         return returnList
+    }
+
+    suspend fun insertQiitaBookmark(qiitaBookmark: QiitaBookmark) {
+        qiitaBookmarkDb.qiitaBookmarkDao().insert(qiitaBookmark)
     }
 }
