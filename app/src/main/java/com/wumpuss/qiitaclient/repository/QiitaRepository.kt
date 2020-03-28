@@ -65,6 +65,7 @@ class QiitaRepository(private val context: Context): KoinComponent {
 
     suspend fun getBookmarks(): List<QiitaBookmark> {
         var bookmarkList = emptyList<QiitaBookmark>()
+
         runCatching {
             qiitaBookmarkDb.qiitaBookmarkDao().getBookmarks()
         }.onSuccess {
