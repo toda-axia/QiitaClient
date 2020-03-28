@@ -1,11 +1,9 @@
 package com.wumpuss.qiitaclient.ui
 
-
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.wumpuss.qiitaclient.R
 import com.wumpuss.qiitaclient.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.fragment_new_article.*
@@ -20,7 +18,8 @@ class NewArticleFragment : Fragment() {
                 bookmark.id,
                 bookmark.title,
                 bookmark.url,
-                bookmark.profileImage))
+                bookmark.profileImage)
+            )
         }
     }
 
@@ -34,20 +33,17 @@ class NewArticleFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        with(new_title_list) {
-            layoutManager = LinearLayoutManager(requireContext())
-            adapter = qiitaAdapter
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        viewModel.getRecentArticle()
-        viewModel.initialQiitaInfoList.observe(this, Observer { list ->
+        new_title_list.adapter = qiitaAdapter
+        viewModel.initialQiitaInfoList.observe(viewLifecycleOwner, Observer { list ->
             list?.let {
                 qiitaAdapter.qiitaInfoList = it
             }
             qiitaAdapter.notifyDataSetChanged()
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getRecentArticle()
     }
 }

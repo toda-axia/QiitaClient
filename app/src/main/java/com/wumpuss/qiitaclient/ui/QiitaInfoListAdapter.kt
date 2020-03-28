@@ -9,11 +9,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.wumpuss.qiitaclient.data.QiitaInfo
 import com.wumpuss.qiitaclient.databinding.QiitaItemBinding
 import com.bumptech.glide.Glide
-import com.wumpuss.qiitaclient.model.Bookmark
+import com.wumpuss.qiitaclient.data.QiitaBookmark
 
 class QiitaInfoListAdapter(
     private val context: Context,
-    private val listener : (Bookmark) -> Unit
+    private val listener : (QiitaBookmark) -> Unit
 ): RecyclerView.Adapter<QiitaInfoListAdapter.QiitaInfoViewHolder>() {
     companion object {
         private const val CLICKABLE_DELAY_TIME = 100L
@@ -38,11 +38,12 @@ class QiitaInfoListAdapter(
 
         holder.itemView.setSafeClickListener {
             listener.invoke(
-                Bookmark.createBookmarkModel(
+                QiitaBookmark(
                     qiitaInfoList[position].id,
                     qiitaInfoList[position].title,
                     qiitaInfoList[position].url,
-                    qiitaInfoList[position].qiitaUser.profile_image_url)
+                    qiitaInfoList[position].qiitaUser.profile_image_url
+                )
             )
         }
     }

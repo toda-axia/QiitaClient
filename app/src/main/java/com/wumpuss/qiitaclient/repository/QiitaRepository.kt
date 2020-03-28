@@ -10,6 +10,7 @@ import com.wumpuss.qiitaclient.db.QiitaBookmarkDatabase
 import com.wumpuss.qiitaclient.utils.LoadStatus
 import org.koin.core.KoinComponent
 import org.koin.core.inject
+import java.util.logging.Logger
 
 class QiitaRepository(private val context: Context): KoinComponent {
     private val qiitaApiService: QiitaClientService by inject()
@@ -60,5 +61,17 @@ class QiitaRepository(private val context: Context): KoinComponent {
 
     suspend fun insertQiitaBookmark(qiitaBookmark: QiitaBookmark) {
         qiitaBookmarkDb.qiitaBookmarkDao().insert(qiitaBookmark)
+    }
+
+    suspend fun getBookmarks(): List<QiitaBookmark> {
+        var bookmarkList = emptyList<QiitaBookmark>()
+        runCatching {
+            qiitaBookmarkDb.qiitaBookmarkDao().getBookmarks()
+        }.onSuccess {
+            bookmarkList = it
+        }.onFailure {
+        }
+
+        return bookmarkList
     }
 }

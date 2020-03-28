@@ -13,10 +13,12 @@ class MainViewModel(private val app: Application): ViewModel(), KoinComponent {
     private val repository: QiitaRepository by inject()
     val searchTag = MutableLiveData<String>()
     val initialQiitaInfoList =  MutableLiveData<List<QiitaInfo>>()
+    val bookmarkQiitaList = MutableLiveData<List<QiitaBookmark>>()
     var id = ""
     var title = ""
     var url = ""
     var profileImage = ""
+
     fun getArticle(tag: String?) {
         searchTag.value = tag
     }
@@ -37,6 +39,12 @@ class MainViewModel(private val app: Application): ViewModel(), KoinComponent {
     fun getRecentArticle() {
         viewModelScope.launch {
             initialQiitaInfoList.value = repository.getRecentArticle()
+        }
+    }
+
+    fun getBookmarks() {
+        viewModelScope.launch {
+            bookmarkQiitaList.value = repository.getBookmarks()
         }
     }
 }

@@ -2,6 +2,7 @@ package com.wumpuss.qiitaclient.ui
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 
 import com.wumpuss.qiitaclient.R
@@ -26,17 +27,26 @@ class QiitaContentFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         content_view.loadUrl(viewModel.url)
-
-        viewModel.insertBookmark(QiitaBookmark(
-            viewModel.id,
-            viewModel.title,
-            viewModel.url,
-            viewModel.profileImage
-        ))
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_content, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_add -> {
+                viewModel.insertBookmark(QiitaBookmark(
+                    viewModel.id,
+                    viewModel.title,
+                    viewModel.url,
+                    viewModel.profileImage
+                ))
+                Toast.makeText(context, "この記事を保存しました。", Toast.LENGTH_SHORT).show()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }
