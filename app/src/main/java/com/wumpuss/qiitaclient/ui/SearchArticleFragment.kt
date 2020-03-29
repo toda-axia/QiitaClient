@@ -52,7 +52,6 @@ class SearchArticleFragment : Fragment() {
     }
 
     private fun observeViewModel() {
-        search_tag_text.text = viewModel.searchTag.value
         viewModel.qiitaInfoList.observe(viewLifecycleOwner, Observer { list ->
             list?.let {
                 qiitaAdapter.qiitaInfoList = it
