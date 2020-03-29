@@ -43,6 +43,11 @@ class NewArticleFragment : Fragment() {
         })
 
         bindViews()
+
+        swipe_to_refresh_qiita_client.setOnRefreshListener{
+            swipe_to_refresh_qiita_client.isRefreshing = false
+            viewModel.getRecentArticle()
+        }
     }
 
     override fun onResume() {
