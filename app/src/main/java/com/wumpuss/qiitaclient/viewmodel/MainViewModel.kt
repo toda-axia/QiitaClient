@@ -16,6 +16,7 @@ class MainViewModel(private val app: Application): ViewModel(), KoinComponent {
     val initialQiitaInfoList =  MutableLiveData<List<QiitaInfo>>()
     val bookmarkQiitaList = MutableLiveData<List<QiitaBookmark>>()
     val loadProgressStatus = MutableLiveData<LoadStatus>()
+    val searchProgressStatus = MutableLiveData<LoadStatus>()
     var id = ""
     var title = ""
     var url = ""
@@ -27,7 +28,9 @@ class MainViewModel(private val app: Application): ViewModel(), KoinComponent {
     val qiitaInfoList: LiveData<List<QiitaInfo>> = Transformations.switchMap(searchTag){ tag ->
         tag?.let {
             liveData {
+                searchProgressStatus.value = LoadStatus.LOADING
                 emit(repository.getArticle(it))
+                searchProgressStatus.value = LoadStatus.LOADED
             }
         }
     }
