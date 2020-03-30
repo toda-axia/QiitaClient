@@ -10,7 +10,6 @@ import com.wumpuss.qiitaclient.R
 import com.wumpuss.qiitaclient.utils.LoadStatus
 import com.wumpuss.qiitaclient.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.fragment_search_article.*
-import kotlinx.android.synthetic.main.fragment_search_article.swipe_to_refresh_qiita_client
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class SearchArticleFragment : Fragment() {
@@ -41,11 +40,6 @@ class SearchArticleFragment : Fragment() {
         search_button.setOnClickListener {
             viewModel.getArticle(input_search_tag.text.toString())
             observeViewModel()
-        }
-
-        swipe_to_refresh_qiita_client.setOnRefreshListener{
-            swipe_to_refresh_qiita_client.isRefreshing = false
-            viewModel.getArticle(input_search_tag.text.toString())
         }
 
         bindViews()
