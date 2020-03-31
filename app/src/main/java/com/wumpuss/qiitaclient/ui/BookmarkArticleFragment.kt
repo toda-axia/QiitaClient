@@ -1,10 +1,12 @@
 package com.wumpuss.qiitaclient.ui
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 
 import com.wumpuss.qiitaclient.R
@@ -14,8 +16,10 @@ import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class BookmarkArticleFragment : Fragment() {
     private val viewModel: MainViewModel by sharedViewModel()
+    private var listener: ConfirmDeleteListener? = null
+    private var lifecycleOwner: LifecycleOwner? = null
     private val qiitaBookmarkAdapter: QiitaBookmarkListAdapter by lazy {
-        QiitaBookmarkListAdapter(requireContext(), viewModel) { bookmark ->
+        QiitaBookmarkListAdapter(requireContext(), listener) { bookmark ->
             startActivity(QiitaContentActivity.callingIntent(
                 requireContext(),
                 bookmark.id,
@@ -23,6 +27,18 @@ class BookmarkArticleFragment : Fragment() {
                 bookmark.url,
                 bookmark.profileImage))
         }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        listener = context as? ConfirmDeleteListener
+        lifecycleOwner = context as? LifecycleOwner
+    }
+
+    override fun onDetach() {
+        listener = null
+        lifecycleOwner = null
+        super.onDetach()
     }
 
     override fun onCreateView(
@@ -57,4 +73,8 @@ class BookmarkArticleFragment : Fragment() {
 
         viewModel.getBookmarks()
     }
+}
+
+interface ConfirmDeleteListener {
+    fun confirmDeletingBookmark(id: String)
 }

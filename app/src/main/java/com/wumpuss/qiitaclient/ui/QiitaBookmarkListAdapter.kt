@@ -14,7 +14,7 @@ import com.wumpuss.qiitaclient.viewmodel.MainViewModel
 
 class QiitaBookmarkListAdapter(
     private val context: Context,
-    private val viewModel: MainViewModel,
+    private val confirmdeleteListener: ConfirmDeleteListener?,
     private val listener : (QiitaBookmark) -> Unit
 ): RecyclerView.Adapter<QiitaBookmarkListAdapter.QiitaBookmarkViewHolder>() {
     companion object {
@@ -45,7 +45,7 @@ class QiitaBookmarkListAdapter(
         }
 
         holder.itemView.setOnLongClickListener {
-            viewModel.deleteBookmarkId.value = qiitaBookmarkList[position].id
+            confirmdeleteListener?.confirmDeletingBookmark(qiitaBookmarkList[position].id)
             true
         }
     }
