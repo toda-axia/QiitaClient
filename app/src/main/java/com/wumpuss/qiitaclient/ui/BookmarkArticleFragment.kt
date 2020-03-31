@@ -15,7 +15,7 @@ import org.koin.android.viewmodel.ext.android.sharedViewModel
 class BookmarkArticleFragment : Fragment() {
     private val viewModel: MainViewModel by sharedViewModel()
     private val qiitaBookmarkAdapter: QiitaBookmarkListAdapter by lazy {
-        QiitaBookmarkListAdapter(requireContext()) { bookmark ->
+        QiitaBookmarkListAdapter(requireContext(), viewModel) { bookmark ->
             startActivity(QiitaContentActivity.callingIntent(
                 requireContext(),
                 bookmark.id,
@@ -43,6 +43,12 @@ class BookmarkArticleFragment : Fragment() {
                 qiitaBookmarkAdapter.qiitaBookmarkList = it
             }
             qiitaBookmarkAdapter.notifyDataSetChanged()
+        })
+
+        viewModel.deleteBookmarkId.observe(viewLifecycleOwner, Observer {
+            if (it != "") {
+                ConfirmDeleteDialog().show(parentFragmentManager, "ConfirmDeleteDialog")
+            }
         })
     }
 
