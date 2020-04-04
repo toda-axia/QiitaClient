@@ -43,7 +43,7 @@ class QiitaContentFragment : Fragment() {
                     viewModel.url,
                     viewModel.profileImage
                 ))
-                Toast.makeText(context, "この記事を保存しました。", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, getString(R.string.save_article_done), Toast.LENGTH_SHORT).show()
                 true
             }
             else -> super.onOptionsItemSelected(item)

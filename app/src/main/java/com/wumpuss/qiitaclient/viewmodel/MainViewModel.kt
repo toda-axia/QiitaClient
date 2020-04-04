@@ -57,11 +57,8 @@ class MainViewModel(private val app: Application): ViewModel(), KoinComponent {
 
     fun deleteBookmark(id: String) {
         viewModelScope.launch {
-            runCatching {
-                repository.deleteBookmark(id)
-            }.onSuccess {
-                getBookmarks()
-            }
+            repository.deleteBookmark(id)
+            getBookmarks()
         }
     }
 }
