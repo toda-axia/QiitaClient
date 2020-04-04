@@ -17,4 +17,5 @@
     <string name="negative_button">いいえ</string>
     <string name="delete_complete_button">削除完了</string>
     <string name="complete_delete_text">選択したブックマークを削除しました。</string>
+    <string name="no_bookmark">現在、保存している記事はありません。</string>
 </resources>

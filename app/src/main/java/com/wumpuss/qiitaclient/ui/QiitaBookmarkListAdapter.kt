@@ -5,12 +5,10 @@ import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.wumpuss.qiitaclient.data.QiitaBookmark
 import com.wumpuss.qiitaclient.databinding.QiitaBookmarkItemBinding
-import com.wumpuss.qiitaclient.viewmodel.MainViewModel
 
 class QiitaBookmarkListAdapter(
     private val context: Context,

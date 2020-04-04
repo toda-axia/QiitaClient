@@ -56,15 +56,14 @@ class BookmarkArticleFragment : Fragment() {
 
         viewModel.bookmarkQiitaList.observe(viewLifecycleOwner, Observer { list ->
             list?.let {
+                if (list.size == 0) {
+                    no_bookmark_text.visibility = View.VISIBLE
+                } else {
+                    no_bookmark_text.visibility = View.GONE
+                }
                 qiitaBookmarkAdapter.qiitaBookmarkList = it
             }
             qiitaBookmarkAdapter.notifyDataSetChanged()
-        })
-
-        viewModel.deleteBookmarkId.observe(viewLifecycleOwner, Observer {
-            if (it != "") {
-                ConfirmDeleteDialog().show(parentFragmentManager, "ConfirmDeleteDialog")
-            }
         })
     }
 

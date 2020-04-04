@@ -13,7 +13,6 @@ import org.koin.core.inject
 class MainViewModel(private val app: Application): ViewModel(), KoinComponent {
     private val repository: QiitaRepository by inject()
     val searchTag = MutableLiveData<String>()
-    var deleteBookmarkId = MutableLiveData("")
     val initialQiitaInfoList =  MutableLiveData<List<QiitaInfo>>()
     val bookmarkQiitaList = MutableLiveData<List<QiitaBookmark>>()
     val loadProgressStatus = MutableLiveData<LoadStatus>()
