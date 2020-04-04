@@ -8,4 +8,13 @@
     <string name="new_articles">新着記事</string>
     <string name="search_articles">記事検索</string>
     <string name="bookmark_articles">保存した記事</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="comfirm_deleting_article_title">保存した記事の削除</string>
+    <string name="confirm_deleting_article_text">本当に削除して良いですか？</string>
+    <string name="positive_button">はい</string>
+    <string name="negative_button">いいえ</string>
+    <string name="delete_complete_button">削除完了</string>
+    <string name="complete_delete_text">選択したブックマークを削除しました。</string>
 </resources>

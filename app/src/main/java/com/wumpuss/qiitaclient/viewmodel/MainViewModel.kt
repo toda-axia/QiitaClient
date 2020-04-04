@@ -55,4 +55,14 @@ class MainViewModel(private val app: Application): ViewModel(), KoinComponent {
             bookmarkQiitaList.value = repository.getBookmarks()
         }
     }
+
+    fun deleteBookmark(id: String) {
+        viewModelScope.launch {
+            runCatching {
+                repository.deleteBookmark(id)
+            }.onSuccess {
+                getBookmarks()
+            }
+        }
+    }
 }

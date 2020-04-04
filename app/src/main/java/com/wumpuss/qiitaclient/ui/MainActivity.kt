@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity(), ConfirmDeleteListener {
     }
 
     override fun confirmDeletingBookmark(id: String) {
+        viewModel.id = id
         ConfirmDeleteDialog().show(supportFragmentManager, "ConfirmDeleteDialog")
     }
 }

@@ -1,9 +1,6 @@
 package com.wumpuss.qiitaclient.db
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.wumpuss.qiitaclient.data.QiitaBookmark
 
 @Dao
@@ -13,4 +10,7 @@ interface QiitaBookmarkDao {
 
     @Query("SELECT * FROM QiitaBookmark")
     suspend fun getBookmarks(): List<QiitaBookmark>
+
+    @Query("DELETE FROM QiitaBookmark WHERE id = :id")
+    suspend fun delete(id: String)
 }

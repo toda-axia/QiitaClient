@@ -65,4 +65,8 @@ class QiitaRepository(private val context: Context): KoinComponent {
 
         return bookmarkList
     }
+
+    suspend fun deleteBookmark(id: String) {
+        qiitaBookmarkDb.qiitaBookmarkDao().delete(id)
+    }
 }
