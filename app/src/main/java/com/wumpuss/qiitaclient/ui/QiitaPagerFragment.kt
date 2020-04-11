@@ -30,7 +30,26 @@ class QiitaPagerFragment : Fragment() {
         val tabArray = arrayListOf(
             getString(R.string.new_articles),
             getString(R.string.search_articles),
-            getString(R.string.bookmark_articles)
+            getString(R.string.bookmark_articles),
+            "Ruby",
+            "Rails",
+            "PHP",
+            "Laravel",
+            "CakePHP",
+            "JavaScript",
+            "Vue",
+            "React",
+            "Android",
+            "Kotlin",
+            "iOS",
+            "Swift",
+            "Flutter",
+            "Dart",
+            "Firebase",
+            "AWS",
+            "Java",
+            "C",
+            "Perl"
         )
 
         activity?.let {
@@ -52,7 +71,7 @@ class QiitaPagerAdapter(fa: FragmentActivity, private val tabs: List<String>) : 
             0 -> NewArticleFragment()
             1 -> SearchArticleFragment()
             2 -> BookmarkArticleFragment()
-            else -> NewArticleFragment()
+            else -> BookmarkArticleFragment()
         }
     }
 }
