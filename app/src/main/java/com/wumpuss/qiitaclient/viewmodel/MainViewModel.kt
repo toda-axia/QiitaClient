@@ -51,11 +51,13 @@ class MainViewModel(private val app: Application): ViewModel(), KoinComponent {
         }
     }
 
-    fun getArticleByTag(tag: String) {
-        viewModelScope.launch {
-            searchResultQiitaInfoList.value = repository.getArticle(tag)
-        }
-    }
+//    fun getArticleByTag(tag: String) {
+//        viewModelScope.launch {
+//            loadProgressStatus.value = LoadStatus.LOADING
+//            searchResultQiitaInfoList.value = repository.getArticle(tag)
+//            loadProgressStatus.value = LoadStatus.LOADED
+//        }
+//    }
 
     fun getBookmarks() {
         viewModelScope.launch {
