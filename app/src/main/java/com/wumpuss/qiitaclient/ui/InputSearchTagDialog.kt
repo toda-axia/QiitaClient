@@ -12,6 +12,9 @@ import androidx.fragment.app.DialogFragment
 import com.google.android.material.textfield.TextInputEditText
 
 import com.wumpuss.qiitaclient.R
+import kotlinx.android.synthetic.main.fragment_input_search_tag_dialog.*
+import kotlinx.android.synthetic.main.fragment_search_result.*
+import kotlinx.android.synthetic.main.fragment_search_result.tag_text
 
 class InputSearchTagDialog : DialogFragment() {
     companion object {
@@ -33,10 +36,13 @@ class InputSearchTagDialog : DialogFragment() {
             dismissAllowingStateLoss()
         }
 
+//        if (tagText.text.isNullOrEmpty()) {
+//            searchButton.isEnabled = false
+//        }
+
         return AlertDialog.Builder(requireContext())
             .apply {
                 setView(inputSearchTagDialogView)
             }.create()
     }
-
 }

@@ -10,7 +10,6 @@ import androidx.lifecycle.Observer
 import com.wumpuss.qiitaclient.R
 import com.wumpuss.qiitaclient.utils.LoadStatus
 import com.wumpuss.qiitaclient.viewmodel.MainViewModel
-import kotlinx.android.synthetic.main.fragment_search_article.*
 import kotlinx.android.synthetic.main.fragment_search_result.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 

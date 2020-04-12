@@ -14,7 +14,6 @@ class MainViewModel(private val app: Application): ViewModel(), KoinComponent {
     private val repository: QiitaRepository by inject()
     val searchTag = MutableLiveData<String>()
     val initialQiitaInfoList =  MutableLiveData<List<QiitaInfo>>()
-    val searchResultQiitaInfoList = MutableLiveData<List<QiitaInfo>>()
     val bookmarkQiitaList = MutableLiveData<List<QiitaBookmark>>()
     val loadProgressStatus = MutableLiveData<LoadStatus>()
     val searchProgressStatus = MutableLiveData<LoadStatus>()
@@ -50,14 +49,6 @@ class MainViewModel(private val app: Application): ViewModel(), KoinComponent {
             loadProgressStatus.value = LoadStatus.LOADED
         }
     }
-
-//    fun getArticleByTag(tag: String) {
-//        viewModelScope.launch {
-//            loadProgressStatus.value = LoadStatus.LOADING
-//            searchResultQiitaInfoList.value = repository.getArticle(tag)
-//            loadProgressStatus.value = LoadStatus.LOADED
-//        }
-//    }
 
     fun getBookmarks() {
         viewModelScope.launch {

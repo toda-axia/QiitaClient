@@ -13,6 +13,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="24dp"
         android:text="検索タグ"
+        android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,7 +23,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,6 +36,16 @@
             android:hint="@string/please_input_search_tag" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+        android:id="@+id/search_note"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="(例:スペース入れずに「Android」「Ruby」「Rails」など)"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
+
     <Button
         android:id="@+id/cancel_button"
         style="@style/Widget.AppCompat.Button.Borderless"
@@ -44,7 +55,7 @@
         android:text="@string/cancel_ja"
         app:layout_constraintEnd_toStartOf="@id/seach_button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
+        app:layout_constraintTop_toBottomOf="@+id/search_note" />
 
     <Button
         android:id="@+id/seach_button"
@@ -55,5 +66,5 @@
         android:text="@string/search"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/cancel_button"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
+        app:layout_constraintTop_toBottomOf="@+id/search_note" />
 </androidx.constraintlayout.widget.ConstraintLayout>

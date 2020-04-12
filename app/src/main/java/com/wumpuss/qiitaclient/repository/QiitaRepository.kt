@@ -45,8 +45,9 @@ class QiitaRepository(private val context: Context): KoinComponent {
             } else {
                 Toast.makeText(context, response.code().toString(), Toast.LENGTH_SHORT).show()
             }
-        }.onFailure { e ->
-            Toast.makeText(context, "Exception: ${e.message}", Toast.LENGTH_SHORT).show()
+        }.onFailure {
+//            Toast.makeText(context, "Exception: ${e.message}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, context.getString(R.string.search_article_error), Toast.LENGTH_SHORT).show()
         }
 
         return returnList

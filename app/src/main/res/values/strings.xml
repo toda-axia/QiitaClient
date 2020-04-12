@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">QiitaClient</string>
     <string name="search_word">検索タグ</string>
-    <string name="please_input_search_tag">検索したいタグを入力して下さい。</string>
+    <string name="please_input_search_tag">検索タグを入力して下さい。</string>
     <string name="search">検索する</string>
     <string name="cancel_ja">キャンセル</string>
     <string name="recent_article">最新の記事</string>
@@ -18,8 +18,6 @@
     <string name="save_article_done">この記事を保存しました。</string>
     <string name="save_article_error">保存した記事の取得に失敗しました。</string>
     <string name="delete_bookmark_article_error">保存した記事の削除に失敗しました。</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="search_title">検索タグ：</string>
+    <string name="search_article_error">記事の検索に失敗しました。</string>
 </resources>
