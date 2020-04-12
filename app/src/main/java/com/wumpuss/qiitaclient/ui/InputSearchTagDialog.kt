@@ -3,18 +3,12 @@ package com.wumpuss.qiitaclient.ui
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.DialogFragment
 import com.google.android.material.textfield.TextInputEditText
-
 import com.wumpuss.qiitaclient.R
-import kotlinx.android.synthetic.main.fragment_input_search_tag_dialog.*
-import kotlinx.android.synthetic.main.fragment_search_result.*
-import kotlinx.android.synthetic.main.fragment_search_result.tag_text
 
 class InputSearchTagDialog : DialogFragment() {
     companion object {
@@ -36,9 +30,15 @@ class InputSearchTagDialog : DialogFragment() {
             dismissAllowingStateLoss()
         }
 
-//        if (tagText.text.isNullOrEmpty()) {
-//            searchButton.isEnabled = false
-//        }
+        tagText.addTextChangedListener(
+//            beforeTextChanged = { text, start, count, after ->
+//            },
+//            onTextChanged = { text, start, count, after ->
+//            },
+            afterTextChanged = { text ->
+                searchButton.isEnabled = text.toString().isNotEmpty()
+            }
+        )
 
         return AlertDialog.Builder(requireContext())
             .apply {
