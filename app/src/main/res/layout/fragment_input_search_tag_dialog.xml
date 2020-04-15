@@ -30,9 +30,10 @@
         app:layout_constraintTop_toBottomOf="@+id/input_seach_tag_title">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tag_text"
+            android:id="@+id/input_tag_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="text"
             android:hint="@string/please_input_search_tag" />
     </com.google.android.material.textfield.TextInputLayout>
 

@@ -19,7 +19,7 @@ class InputSearchTagDialog : DialogFragment() {
         val inputSearchTagDialogView = View.inflate(context, R.layout.fragment_input_search_tag_dialog, null)
         val searchButton = inputSearchTagDialogView.findViewById(R.id.seach_button) as Button
         val cancelButton = inputSearchTagDialogView.findViewById(R.id.cancel_button) as Button
-        val tagText = inputSearchTagDialogView.findViewById(R.id.tag_text) as TextInputEditText
+        val tagText = inputSearchTagDialogView.findViewById(R.id.input_tag_text) as TextInputEditText
 
         cancelButton.setOnClickListener {
             dismissAllowingStateLoss()
