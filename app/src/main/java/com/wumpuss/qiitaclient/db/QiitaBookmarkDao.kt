@@ -11,6 +11,9 @@ interface QiitaBookmarkDao {
     @Query("SELECT * FROM QiitaBookmark")
     suspend fun getBookmarks(): List<QiitaBookmark>
 
+    @Query("SELECT * FROM QiitaBookmark WHERE id = :id")
+    suspend fun isBookmark(id: String): QiitaBookmark
+
     @Query("DELETE FROM QiitaBookmark WHERE id = :id")
     suspend fun delete(id: String)
 }

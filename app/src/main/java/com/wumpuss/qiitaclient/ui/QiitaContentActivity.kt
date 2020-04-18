@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.wumpuss.qiitaclient.R
 import com.wumpuss.qiitaclient.viewmodel.MainViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -32,6 +33,7 @@ class QiitaContentActivity : AppCompatActivity() {
         viewModel.title = intent.getStringExtra(INTENT_EXTRA_TITLE)!!
         viewModel.url = intent.getStringExtra(INTENT_EXTRA_URL)!!
         viewModel.profileImage = intent.getStringExtra(INTENT_EXTRA_PROFILE_IMAGE)!!
+        viewModel.isBookmark = viewModel.isBookmark(viewModel.id)
 
         setContentView(R.layout.activity_qiita_content)
     }

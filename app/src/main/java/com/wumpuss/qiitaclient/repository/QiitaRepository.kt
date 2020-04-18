@@ -71,6 +71,20 @@ class QiitaRepository(private val context: Context): KoinComponent {
         return bookmarkList
     }
 
+    suspend fun isBookmark(id: String): Boolean {
+        var isBookmark = false
+        runCatching {
+            qiitaBookmarkDb.qiitaBookmarkDao().isBookmark(id)
+        }.onSuccess {
+            it?.let {
+                isBookmark = true
+            }
+        }.onFailure {
+            //isBookmark = false
+        }
+        return isBookmark
+    }
+
     suspend fun deleteBookmark(id: String) {
         runCatching {
             qiitaBookmarkDb.qiitaBookmarkDao().delete(id)

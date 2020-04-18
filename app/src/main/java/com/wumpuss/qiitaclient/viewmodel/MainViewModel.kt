@@ -22,6 +22,7 @@ class MainViewModel(private val app: Application): ViewModel(), KoinComponent {
     var url = ""
     var profileImage = ""
     var tag = ""
+    var isBookmark = false
 
     fun getArticle(tag: String?) {
         searchTag.value = tag
@@ -54,6 +55,13 @@ class MainViewModel(private val app: Application): ViewModel(), KoinComponent {
         viewModelScope.launch {
             bookmarkQiitaList.value = repository.getBookmarks()
         }
+    }
+
+    fun isBookmark(id: String): Boolean {
+        viewModelScope.launch {
+            isBookmark = repository.isBookmark(id)
+        }
+        return isBookmark
     }
 
     fun deleteBookmark(id: String) {

@@ -14,7 +14,7 @@
     <string name="positive_button">はい</string>
     <string name="negative_button">いいえ</string>
     <string name="delete_complete_button">削除完了</string>
-    <string name="complete_delete_text">選択したブックマークを削除しました。</string>
+    <string name="complete_delete_text">ブックマークを削除しました。</string>
     <string name="no_bookmark">現在、保存している記事はありません。</string>
     <string name="save_article_done">この記事を保存しました。</string>
     <string name="save_article_error">保存した記事の取得に失敗しました。</string>

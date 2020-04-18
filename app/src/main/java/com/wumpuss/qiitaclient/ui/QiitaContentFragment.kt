@@ -31,19 +31,33 @@ class QiitaContentFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu_content, menu)
+        inflater.inflate(R.menu.menu_bookmark, menu)
+
+        val bookmarkIcon = menu.findItem(R.id.bookmark_icon)
+        if (viewModel.isBookmark) {
+            bookmarkIcon.setIcon(R.drawable.ic_bookmark_black_24dp)
+        } else {
+            bookmarkIcon.setIcon(R.drawable.ic_bookmark_border_black_24dp)
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.menu_add -> {
-                viewModel.insertBookmark(QiitaBookmark(
-                    viewModel.id,
-                    viewModel.title,
-                    viewModel.url,
-                    viewModel.profileImage
-                ))
-                Toast.makeText(context, getString(R.string.save_article_done), Toast.LENGTH_SHORT).show()
+            R.id.bookmark_icon -> {
+                viewModel.isBookmark = !viewModel.isBookmark
+                requireActivity().invalidateOptionsMenu()
+                if (viewModel.isBookmark) {
+                    viewModel.insertBookmark(QiitaBookmark(
+                        viewModel.id,
+                        viewModel.title,
+                        viewModel.url,
+                        viewModel.profileImage
+                    ))
+                    Toast.makeText(context, getString(R.string.save_article_done), Toast.LENGTH_SHORT).show()
+                } else {
+                    viewModel.deleteBookmark(viewModel.id)
+                    Toast.makeText(context, getString(R.string.complete_delete_text), Toast.LENGTH_SHORT).show()
+                }
                 true
             }
             else -> super.onOptionsItemSelected(item)
