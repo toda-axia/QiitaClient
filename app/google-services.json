@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "938713969506",
+    "firebase_url": "https://qiitaclient-fe628.firebaseio.com",
+    "project_id": "qiitaclient-fe628",
+    "storage_bucket": "qiitaclient-fe628.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:938713969506:android:b9b2eba1734e4b88de723b",
+        "android_client_info": {
+          "package_name": "com.wumpuss.qiitaclient"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "938713969506-ih6tl6etorek03nogti4mmeplcmsnc07.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFkJmXjD-hsE2ruimV13s9TnFyy8NYilQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "938713969506-ih6tl6etorek03nogti4mmeplcmsnc07.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
