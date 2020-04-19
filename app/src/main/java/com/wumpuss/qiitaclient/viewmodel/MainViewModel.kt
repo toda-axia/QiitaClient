@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.*
 import com.wumpuss.qiitaclient.data.QiitaBookmark
 import com.wumpuss.qiitaclient.data.QiitaInfo
+import com.wumpuss.qiitaclient.data.QiitaTag
 import com.wumpuss.qiitaclient.repository.QiitaRepository
 import com.wumpuss.qiitaclient.utils.LoadStatus
 import kotlinx.coroutines.launch
@@ -23,6 +24,7 @@ class MainViewModel(private val app: Application): ViewModel(), KoinComponent {
     var profileImage = ""
     var tag = ""
     var isBookmark = false
+    var allTags = emptyList<QiitaTag>()
 
     fun getArticle(tag: String?) {
         searchTag.value = tag
@@ -68,6 +70,12 @@ class MainViewModel(private val app: Application): ViewModel(), KoinComponent {
         viewModelScope.launch {
             repository.deleteBookmark(id)
             getBookmarks()
+        }
+    }
+
+    fun getAllTags() {
+        viewModelScope.launch {
+            allTags = repository.getAllTags()
         }
     }
 }

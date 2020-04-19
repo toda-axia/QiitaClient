@@ -23,6 +23,8 @@ class MainActivity : AppCompatActivity(), ConfirmDeleteListener {
         fab.setOnClickListener {
             InputSearchTagDialog().show(supportFragmentManager, InputSearchTagDialog.TAG)
         }
+
+        viewModel.getAllTags()
     }
 
     override fun confirmDeletingBookmark(id: String) {

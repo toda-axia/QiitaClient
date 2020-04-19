@@ -8,6 +8,7 @@ import com.wumpuss.qiitaclient.viewmodel.MainViewModel
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.wumpuss.qiitaclient.db.QiitaBookmarkDatabase
+import com.wumpuss.qiitaclient.service.QiitaClientService
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.android.viewmodel.dsl.viewModel

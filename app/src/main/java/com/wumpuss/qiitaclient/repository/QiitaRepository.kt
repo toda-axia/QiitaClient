@@ -2,13 +2,12 @@ package com.wumpuss.qiitaclient.repository
 
 import android.content.Context
 import android.widget.Toast
-import com.wumpuss.qiitaclient.QiitaClientService
+import com.wumpuss.qiitaclient.service.QiitaClientService
 import com.wumpuss.qiitaclient.R
 import com.wumpuss.qiitaclient.data.QiitaBookmark
 import com.wumpuss.qiitaclient.data.QiitaInfo
+import com.wumpuss.qiitaclient.data.QiitaTag
 import com.wumpuss.qiitaclient.db.QiitaBookmarkDatabase
-import com.wumpuss.qiitaclient.ui.CompleteDeletingBookmarkDialog
-import com.wumpuss.qiitaclient.viewmodel.MainViewModel
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
@@ -91,5 +90,19 @@ class QiitaRepository(private val context: Context): KoinComponent {
         }.onFailure {
             Toast.makeText(context, context.getString(R.string.delete_bookmark_article_error), Toast.LENGTH_SHORT).show()
         }
+    }
+
+    suspend fun getAllTags(): List<QiitaTag> {
+        var allTagList = emptyList<QiitaTag>()
+        runCatching {
+            qiitaApiService.getAllTags()
+        }.onSuccess { response ->
+            if (response.isSuccessful) {
+                allTagList = response.body()!!
+            }
+        }.onFailure {
+            Toast.makeText(context, context.getString(R.string.get_tags_error), Toast.LENGTH_SHORT).show()
+        }
+        return allTagList
     }
 }
