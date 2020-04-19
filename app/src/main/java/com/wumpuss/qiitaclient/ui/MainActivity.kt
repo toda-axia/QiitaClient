@@ -16,6 +16,8 @@ class MainActivity : AppCompatActivity(), ConfirmDeleteListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+//        viewModel.getAllTags()
+
         if (BuildConfig.BUILD_TYPE.equals("release")) {
             AnalyticsUtils.sendGameStartLog(baseContext)
         }
@@ -23,8 +25,6 @@ class MainActivity : AppCompatActivity(), ConfirmDeleteListener {
         fab.setOnClickListener {
             InputSearchTagDialog().show(supportFragmentManager, InputSearchTagDialog.TAG)
         }
-
-        viewModel.getAllTags()
     }
 
     override fun confirmDeletingBookmark(id: String) {

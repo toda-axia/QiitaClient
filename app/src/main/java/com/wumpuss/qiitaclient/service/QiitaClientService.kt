@@ -11,6 +11,6 @@ interface QiitaClientService {
     suspend fun getRecentItems(): Response<List<QiitaInfo>>
     @GET("/api/v2/tags/{tag}/items?page=1&per_page=50")
     suspend fun getItemsByTag(@Path("tag") tag: String): Response<List<QiitaInfo>>
-    @GET("/api/v2/tags?sort=count")
+    @GET("/api/v2/tags?page=1&per_page=100&sort=count")
     suspend fun getAllTags(): Response<List<QiitaTag>>
 }

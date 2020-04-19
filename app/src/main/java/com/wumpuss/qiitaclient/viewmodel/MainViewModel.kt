@@ -24,7 +24,7 @@ class MainViewModel(private val app: Application): ViewModel(), KoinComponent {
     var profileImage = ""
     var tag = ""
     var isBookmark = false
-    var allTags = emptyList<QiitaTag>()
+    var allTags: List<QiitaTag> = emptyList()
 
     fun getArticle(tag: String?) {
         searchTag.value = tag
@@ -76,6 +76,9 @@ class MainViewModel(private val app: Application): ViewModel(), KoinComponent {
     fun getAllTags() {
         viewModelScope.launch {
             allTags = repository.getAllTags()
+//            allTags.forEach {
+//                Log.d("デバッグ", it.id)
+//            }
         }
     }
 }

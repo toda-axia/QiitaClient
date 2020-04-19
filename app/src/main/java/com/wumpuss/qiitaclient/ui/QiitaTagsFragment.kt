@@ -1,10 +1,12 @@
 package com.wumpuss.qiitaclient.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 
 import com.wumpuss.qiitaclient.R
 import com.wumpuss.qiitaclient.viewmodel.MainViewModel
@@ -21,6 +23,7 @@ class QiitaTagsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+//        qiitaTagsAdapter.notifyDataSetChanged()
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_qiita_tags, container, false)
     }
@@ -29,7 +32,19 @@ class QiitaTagsFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         all_tags_list.adapter = qiitaTagsAdapter
+        viewModel.allTags.forEach {
+            Log.d("デバッグ2", it.id)
+        }
         qiitaTagsAdapter.qiitaAllTags = viewModel.allTags
-        qiitaTagsAdapter.notifyDataSetChanged()
+
+//        qiitaTagsAdapter.qiitaAllTags = viewModel.allTags
+//        qiitaTagsAdapter.notifyDataSetChanged()
+
+//        viewModel.allTags.observe(viewLifecycleOwner, Observer { list ->
+//            list?.let {
+//                qiitaTagsAdapter.qiitaAllTags = it
+//            }
+//            qiitaTagsAdapter.notifyDataSetChanged()
+//        })
     }
 }
