@@ -1,7 +1,6 @@
 package com.wumpuss.qiitaclient.ui
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -31,16 +30,12 @@ class QiitaTagsFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         all_tags_list.adapter = qiitaTagsAdapter
-        qiitaTagsAdapter.qiitaAllTags = viewModel.allTags
 
-//        qiitaTagsAdapter.qiitaAllTags = viewModel.allTags
-//        qiitaTagsAdapter.notifyDataSetChanged()
-
-//        viewModel.allTags.observe(viewLifecycleOwner, Observer { list ->
-//            list?.let {
-//                qiitaTagsAdapter.qiitaAllTags = it
-//            }
-//            qiitaTagsAdapter.notifyDataSetChanged()
-//        })
+        viewModel.allTags.observe(viewLifecycleOwner, Observer { list ->
+            list?.let {
+                qiitaTagsAdapter.qiitaAllTags = it
+            }
+            qiitaTagsAdapter.notifyDataSetChanged()
+        })
     }
 }

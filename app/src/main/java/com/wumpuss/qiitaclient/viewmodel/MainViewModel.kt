@@ -18,14 +18,13 @@ class MainViewModel(private val app: Application): ViewModel(), KoinComponent {
     val loadProgressStatus = MutableLiveData<LoadStatus>()
     val searchProgressStatus = MutableLiveData<LoadStatus>()
     val initialQiitaInfoList = MutableLiveData<List<QiitaInfo>>()
+    val allTags = MutableLiveData<List<QiitaTag>>()
     var id = ""
     var title = ""
     var url = ""
     var profileImage = ""
     var tag = ""
     var isBookmark = false
-//    var initialQiitaInfoList: List<QiitaInfo> = emptyList()
-    var allTags: List<QiitaTag> = emptyList()
 
     fun getArticle(tag: String?) {
         searchTag.value = tag
@@ -76,7 +75,7 @@ class MainViewModel(private val app: Application): ViewModel(), KoinComponent {
 
     fun getAllTags() {
         viewModelScope.launch {
-            allTags = repository.getAllTags()
+            allTags.value = repository.getAllTags()
         }
     }
 }

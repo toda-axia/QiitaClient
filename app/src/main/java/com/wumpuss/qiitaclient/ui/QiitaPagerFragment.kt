@@ -27,9 +27,6 @@ class QiitaPagerFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-//        viewModel.getRecentArticle()
-//        viewModel.getAllTags()
-
         val tabArray = arrayListOf(
             getString(R.string.new_articles),
             "タグ",
