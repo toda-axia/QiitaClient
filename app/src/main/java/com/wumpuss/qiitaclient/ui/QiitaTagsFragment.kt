@@ -23,7 +23,6 @@ class QiitaTagsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-//        qiitaTagsAdapter.notifyDataSetChanged()
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_qiita_tags, container, false)
     }
@@ -32,9 +31,6 @@ class QiitaTagsFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         all_tags_list.adapter = qiitaTagsAdapter
-        viewModel.allTags.forEach {
-            Log.d("デバッグ2", it.id)
-        }
         qiitaTagsAdapter.qiitaAllTags = viewModel.allTags
 
 //        qiitaTagsAdapter.qiitaAllTags = viewModel.allTags

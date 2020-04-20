@@ -16,7 +16,8 @@ class MainActivity : AppCompatActivity(), ConfirmDeleteListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        viewModel.getAllTags()
+        viewModel.getRecentArticle()
+        viewModel.getAllTags()
 
         if (BuildConfig.BUILD_TYPE.equals("release")) {
             AnalyticsUtils.sendGameStartLog(baseContext)

@@ -50,11 +50,6 @@ class NewArticleFragment : Fragment() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        viewModel.getRecentArticle()
-    }
-
     private fun bindViews() {
         viewModel.loadProgressStatus.observe(viewLifecycleOwner, Observer {
             it?.let {

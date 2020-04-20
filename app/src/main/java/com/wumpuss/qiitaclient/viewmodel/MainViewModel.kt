@@ -14,16 +14,17 @@ import org.koin.core.inject
 class MainViewModel(private val app: Application): ViewModel(), KoinComponent {
     private val repository: QiitaRepository by inject()
     val searchTag = MutableLiveData<String>()
-    val initialQiitaInfoList =  MutableLiveData<List<QiitaInfo>>()
     val bookmarkQiitaList = MutableLiveData<List<QiitaBookmark>>()
     val loadProgressStatus = MutableLiveData<LoadStatus>()
     val searchProgressStatus = MutableLiveData<LoadStatus>()
+    val initialQiitaInfoList = MutableLiveData<List<QiitaInfo>>()
     var id = ""
     var title = ""
     var url = ""
     var profileImage = ""
     var tag = ""
     var isBookmark = false
+//    var initialQiitaInfoList: List<QiitaInfo> = emptyList()
     var allTags: List<QiitaTag> = emptyList()
 
     fun getArticle(tag: String?) {
@@ -76,9 +77,6 @@ class MainViewModel(private val app: Application): ViewModel(), KoinComponent {
     fun getAllTags() {
         viewModelScope.launch {
             allTags = repository.getAllTags()
-//            allTags.forEach {
-//                Log.d("デバッグ", it.id)
-//            }
         }
     }
 }
