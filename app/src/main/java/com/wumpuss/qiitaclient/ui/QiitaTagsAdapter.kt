@@ -8,7 +8,10 @@ import com.bumptech.glide.Glide
 import com.wumpuss.qiitaclient.data.QiitaTag
 import com.wumpuss.qiitaclient.databinding.QiitaTagItemBinding
 
-class QiitaTagsAdapter(private val context: Context): RecyclerView.Adapter<QiitaTagsAdapter.QiitaTagsViewHolder>() {
+class QiitaTagsAdapter(
+    private val context: Context,
+    private val listener : (QiitaTag) -> Unit
+): RecyclerView.Adapter<QiitaTagsAdapter.QiitaTagsViewHolder>() {
     var qiitaAllTags: List<QiitaTag> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QiitaTagsViewHolder {
@@ -27,16 +30,15 @@ class QiitaTagsAdapter(private val context: Context): RecyclerView.Adapter<Qiita
 
         Glide.with(context).load(qiitaAllTags[position].icon_url).into(holder.binding.tagIcon)
 
-//        holder.itemView.setSafeClickListener {
-//            listener.invoke(
-//                QiitaBookmark(
-//                    qiitaInfoList[position].id,
-//                    qiitaInfoList[position].title,
-//                    qiitaInfoList[position].url,
-//                    qiitaInfoList[position].qiitaUser.profile_image_url
-//                )
-//            )
-//        }
+        holder.itemView.setOnClickListener {
+            listener.invoke(
+                QiitaTag(
+                    qiitaAllTags[position].id,
+                    qiitaAllTags[position].icon_url,
+                    qiitaAllTags[position].item_count
+                )
+            )
+        }
     }
 
     inner class QiitaTagsViewHolder(var binding: QiitaTagItemBinding) : RecyclerView.ViewHolder(binding.root)

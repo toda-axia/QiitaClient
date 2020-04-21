@@ -21,11 +21,11 @@ object AnalyticsUtils {
         getAnalytics(context).logEvent(eventName, bundle)
     }
 
-    fun sendGameStartLog(context: Context) {
+    fun sendAppStartLog(context: Context) {
         val bundle = Bundle().apply {
             putString("screen", "home")
             putString("item_id", "app_launch")
         }
-        sendLog(context, "game_select", bundle)
+        sendLog(context, "daily_count", bundle)
     }
 }

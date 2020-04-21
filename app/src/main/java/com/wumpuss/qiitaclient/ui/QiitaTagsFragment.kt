@@ -15,7 +15,9 @@ import org.koin.android.viewmodel.ext.android.sharedViewModel
 class QiitaTagsFragment : Fragment() {
     private val viewModel: MainViewModel by sharedViewModel()
     private val qiitaTagsAdapter: QiitaTagsAdapter by lazy {
-        QiitaTagsAdapter(requireContext())
+        QiitaTagsAdapter(requireContext()) { qiitaTag ->
+            startActivity(SearchResultActivity.callingIntent(requireContext(), qiitaTag.id))
+        }
     }
 
     override fun onCreateView(

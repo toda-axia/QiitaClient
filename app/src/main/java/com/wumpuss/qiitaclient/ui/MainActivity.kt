@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity(), ConfirmDeleteListener {
         viewModel.getAllTags()
 
         if (BuildConfig.BUILD_TYPE.equals("release")) {
-            AnalyticsUtils.sendGameStartLog(baseContext)
+            AnalyticsUtils.sendAppStartLog(baseContext)
         }
 
         fab.setOnClickListener {
