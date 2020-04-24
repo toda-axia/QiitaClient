@@ -25,6 +25,7 @@ class MainViewModel(private val app: Application): ViewModel(), KoinComponent {
     var profileImage = ""
     var tag = ""
     var isBookmark = false
+    var page = 0
 
     fun getArticle(tag: String?) {
         searchTag.value = tag
@@ -48,7 +49,8 @@ class MainViewModel(private val app: Application): ViewModel(), KoinComponent {
     fun getRecentArticle() {
         viewModelScope.launch {
             loadProgressStatus.value = LoadStatus.LOADING
-            initialQiitaInfoList.value = repository.getRecentArticle()
+            page++
+            initialQiitaInfoList.value = repository.getRecentArticle(page)
             loadProgressStatus.value = LoadStatus.LOADED
         }
     }

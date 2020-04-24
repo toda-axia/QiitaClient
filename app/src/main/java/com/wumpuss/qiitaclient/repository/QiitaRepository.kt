@@ -14,15 +14,18 @@ import org.koin.core.inject
 class QiitaRepository(private val context: Context): KoinComponent {
     private val qiitaApiService: QiitaClientService by inject()
     private val qiitaBookmarkDb: QiitaBookmarkDatabase by inject()
+    var returnList = mutableListOf<QiitaInfo>()
 
-    suspend fun getRecentArticle(): List<QiitaInfo> {
-        var returnList = emptyList<QiitaInfo>()
-
+    suspend fun getRecentArticle(page: Int): List<QiitaInfo> {
         runCatching {
-            qiitaApiService.getRecentItems()
+            qiitaApiService.getRecentItems(page)
         }.onSuccess { response ->
             if (response.isSuccessful) {
-                returnList = response.body()!!
+                response.body()?.let {
+                    it.forEach {
+                        returnList.add(it)
+                    }
+                }
             } else {
                 Toast.makeText(context, response.code().toString(), Toast.LENGTH_SHORT).show()
             }
@@ -45,7 +48,6 @@ class QiitaRepository(private val context: Context): KoinComponent {
                 Toast.makeText(context, response.code().toString(), Toast.LENGTH_SHORT).show()
             }
         }.onFailure {
-//            Toast.makeText(context, "Exception: ${e.message}", Toast.LENGTH_SHORT).show()
             Toast.makeText(context, context.getString(R.string.search_article_error), Toast.LENGTH_SHORT).show()
         }
 
