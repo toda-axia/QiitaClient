@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 import com.wumpuss.qiitaclient.R
 import com.wumpuss.qiitaclient.utils.LoadStatus
@@ -37,8 +39,25 @@ class SearchResultFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        val lm = LinearLayoutManager(requireContext())
+
         tag_text.text = viewModel.tag
-        search_result_list.adapter = qiitaAdapter
+        //search_result_list.adapter = qiitaAdapter
+        search_result_list.apply {
+            layoutManager = lm
+            adapter = qiitaAdapter
+            addOnScrollListener(object: RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    if (dy > 0) {
+                        val childCount = qiitaAdapter.itemCount
+                        val lastPosition = lm.findLastCompletelyVisibleItemPosition()
+                        if (childCount - 1 == lastPosition) {
+                            viewModel.getArticle(viewModel.tag)
+                        }
+                    }
+                }
+            })
+        }
         observeViewModel()
     }
 

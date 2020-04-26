@@ -14,16 +14,18 @@ import org.koin.core.inject
 class QiitaRepository(private val context: Context): KoinComponent {
     private val qiitaApiService: QiitaClientService by inject()
     private val qiitaBookmarkDb: QiitaBookmarkDatabase by inject()
-    var returnList = mutableListOf<QiitaInfo>()
+    var returnRecentList = mutableListOf<QiitaInfo>()
+    var returnSearchList = mutableListOf<QiitaInfo>()
 
     suspend fun getRecentArticle(page: Int): List<QiitaInfo> {
+
         runCatching {
             qiitaApiService.getRecentItems(page)
         }.onSuccess { response ->
             if (response.isSuccessful) {
                 response.body()?.let {
                     it.forEach {
-                        returnList.add(it)
+                        returnRecentList.add(it)
                     }
                 }
             } else {
@@ -33,17 +35,19 @@ class QiitaRepository(private val context: Context): KoinComponent {
             Toast.makeText(context, "Exception: ${e.message}", Toast.LENGTH_SHORT).show()
         }
 
-        return returnList
+        return returnRecentList
     }
 
-    suspend fun getArticle(searchTag: String): List<QiitaInfo> {
-        var returnList = emptyList<QiitaInfo>()
-
+    suspend fun getArticle(searchTag: String, page: Int): List<QiitaInfo> {
         runCatching {
-            qiitaApiService.getItemsByTag(searchTag)
+            qiitaApiService.getItemsByTag(searchTag, page)
         }.onSuccess { response ->
             if (response.isSuccessful) {
-                returnList = response.body()!!
+                response.body()?.let {
+                    it.forEach {
+                        returnSearchList.add(it)
+                    }
+                }
             } else {
                 Toast.makeText(context, response.code().toString(), Toast.LENGTH_SHORT).show()
             }
@@ -51,7 +55,7 @@ class QiitaRepository(private val context: Context): KoinComponent {
             Toast.makeText(context, context.getString(R.string.search_article_error), Toast.LENGTH_SHORT).show()
         }
 
-        return returnList
+        return returnSearchList
     }
 
     suspend fun insertQiitaBookmark(qiitaBookmark: QiitaBookmark) {
