@@ -1,7 +1,6 @@
 package com.wumpuss.qiitaclient.viewmodel
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.*
 import com.wumpuss.qiitaclient.data.QiitaBookmark
 import com.wumpuss.qiitaclient.data.QiitaInfo
@@ -27,7 +26,6 @@ class MainViewModel(private val app: Application): ViewModel(), KoinComponent {
     var tag = ""
     var isBookmark = false
     var page = 0
-    var searchPage = 0
 
     fun getArticle(tag: String?) {
         searchTag.value = tag
@@ -36,8 +34,8 @@ class MainViewModel(private val app: Application): ViewModel(), KoinComponent {
         tag?.let {
             liveData {
                 searchProgressStatus.value = LoadStatus.LOADING
-                searchPage++
-                emit(repository.getArticle(it, searchPage))
+                page++
+                emit(repository.getArticle(it, page))
                 searchProgressStatus.value = LoadStatus.LOADED
             }
         }
