@@ -40,7 +40,7 @@
                 android:gravity="center_vertical"
                 android:text="@{qiitabookmark.title}"
                 android:textAlignment="gravity"
-                android:textSize="12sp"
+                android:textSize="13sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/user_image_view"
