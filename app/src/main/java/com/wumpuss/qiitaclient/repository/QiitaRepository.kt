@@ -1,12 +1,14 @@
 package com.wumpuss.qiitaclient.repository
 
 import android.content.Context
+import android.util.Log
 import android.widget.Toast
 import com.wumpuss.qiitaclient.service.QiitaClientService
 import com.wumpuss.qiitaclient.R
 import com.wumpuss.qiitaclient.data.QiitaBookmark
 import com.wumpuss.qiitaclient.data.QiitaInfo
 import com.wumpuss.qiitaclient.data.QiitaTag
+import com.wumpuss.qiitaclient.data.UserCredential
 import com.wumpuss.qiitaclient.db.QiitaBookmarkDatabase
 import org.koin.core.KoinComponent
 import org.koin.core.inject
@@ -110,5 +112,27 @@ class QiitaRepository(private val context: Context): KoinComponent {
             Toast.makeText(context, context.getString(R.string.get_tags_error), Toast.LENGTH_SHORT).show()
         }
         return allTagList
+    }
+
+    suspend fun getMyPosts(): List<QiitaInfo> {
+        var allMyPosts = emptyList<QiitaInfo>()
+        runCatching {
+            qiitaApiService.getMyPosts(
+                // accessToken = "Bearer ${userCredential.accessToken}"
+                accessToken = "Bearer e3967e7dc8acf74970396214ecda735a31ba4837"
+            )
+        }.onSuccess { response ->
+            if (response.isSuccessful) {
+                allMyPosts= response.body()!!
+                allMyPosts.forEach {
+                    Log.d("デバッグ", it.toString())
+                }
+            } else {
+                Toast.makeText(context, "アクセストークンが不正", Toast.LENGTH_SHORT).show()
+            }
+        }.onFailure {
+            Toast.makeText(context, "自分の投稿の取得失敗", Toast.LENGTH_SHORT).show()
+        }
+        return allMyPosts
     }
 }

@@ -29,8 +29,9 @@ class QiitaPagerFragment : Fragment() {
 
         val tabArray = arrayListOf(
             getString(R.string.new_articles),
-            "タグ",
-            getString(R.string.bookmark_articles)
+            getString(R.string.tag),
+            getString(R.string.bookmark_articles),
+            getString(R.string.my_post)
         )
 
         activity?.let {
@@ -52,6 +53,7 @@ class QiitaPagerAdapter(fa: FragmentActivity, private val tabs: List<String>) : 
             0 -> NewArticleFragment()
             1 -> QiitaTagsFragment()
             2 -> BookmarkArticleFragment()
+            3 -> MyPostArticleFragment()
             else -> NewArticleFragment()
         }
     }
