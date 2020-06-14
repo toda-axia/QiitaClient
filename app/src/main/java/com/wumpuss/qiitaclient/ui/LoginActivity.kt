@@ -11,6 +11,7 @@ import com.wumpuss.qiitaclient.viewmodel.LoginViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class LoginActivity : AppCompatActivity(), LoginFragment.Callback {
+    private val viewModel: LoginViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +27,7 @@ class LoginActivity : AppCompatActivity(), LoginFragment.Callback {
 
     override fun onAuthCompleted() {
         Toast.makeText(this, "ログインが完了しました", Toast.LENGTH_SHORT).show()
+        intent.putExtra("INPUT_ACCESS_TOKEN", viewModel.accessToken.toString())
         setResult(Activity.RESULT_OK)
         finish()
     }

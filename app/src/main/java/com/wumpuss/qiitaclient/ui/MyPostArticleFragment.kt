@@ -1,5 +1,6 @@
 package com.wumpuss.qiitaclient.ui
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -66,5 +67,22 @@ class MyPostArticleFragment : Fragment() {
             }
             qiitaAdapter.notifyDataSetChanged()
         })
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == REQUEST_CODE_LOGIN) {
+            when(resultCode) {
+                Activity.RESULT_OK -> {
+                    login_button.visibility = View.GONE
+                    viewModel.getMyPosts()
+                }
+                else -> {
+                    Toast.makeText(requireContext(), "ログインが完了しませんでした", Toast.LENGTH_LONG).show()
+                    requireActivity().finish()
+                }
+            }
+        }
     }
 }

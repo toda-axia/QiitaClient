@@ -15,6 +15,7 @@ import androidx.lifecycle.Observer
 import com.wumpuss.qiitaclient.R
 import com.wumpuss.qiitaclient.databinding.FragmentLoginBinding
 import com.wumpuss.qiitaclient.viewmodel.LoginViewModel
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
@@ -23,7 +24,7 @@ class LoginFragment : Fragment() {
         val TAG = LoginFragment::class.java.simpleName
     }
 
-    private val viewModel: LoginViewModel by viewModel()
+    private val viewModel: LoginViewModel by sharedViewModel()
     private var binding: FragmentLoginBinding? = null
 
     interface Callback {
