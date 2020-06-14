@@ -8,7 +8,10 @@ import com.wumpuss.qiitaclient.viewmodel.MainViewModel
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.wumpuss.qiitaclient.db.QiitaBookmarkDatabase
+import com.wumpuss.qiitaclient.repository.AuthRepository
+import com.wumpuss.qiitaclient.service.LoginApi
 import com.wumpuss.qiitaclient.service.QiitaClientService
+import com.wumpuss.qiitaclient.viewmodel.LoginViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.android.viewmodel.dsl.viewModel
@@ -31,13 +34,18 @@ class QiitaClientApplication: Application() {
     private fun setupKoin() {
         val module: Module = module {
             viewModel{ MainViewModel(get()) }
+            viewModel{ LoginViewModel(get()) }
             single {
                 createApiService(QiitaClientService::class.java)
+            }
+            single {
+                createApiService(LoginApi::class.java)
             }
             single {
                 createDataBase(get())
             }
             factory { QiitaRepository(get()) }
+            factory { AuthRepository(get()) }
         }
         startKoin {
             androidContext(this@QiitaClientApplication)
