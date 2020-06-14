@@ -1,5 +1,6 @@
 package com.wumpuss.qiitaclient.ui
 
+import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -16,6 +17,7 @@ import com.wumpuss.qiitaclient.databinding.FragmentLoginBinding
 import com.wumpuss.qiitaclient.viewmodel.LoginViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
+
 class LoginFragment : Fragment() {
     companion object {
         val TAG = LoginFragment::class.java.simpleName
@@ -24,6 +26,19 @@ class LoginFragment : Fragment() {
     private val viewModel: LoginViewModel by viewModel()
     private var binding: FragmentLoginBinding? = null
 
+    interface Callback {
+        fun onAuthCompleted()
+    }
+
+    private var callback: Callback? = null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        if (context is Callback) {
+            callback = context
+        }
+    }
 
     private val onObtainCode = fun(code: String) {
         viewModel.requestAccessToken(
@@ -47,6 +62,10 @@ class LoginFragment : Fragment() {
         val bindingData: FragmentLoginBinding? = DataBindingUtil.bind(view)
         binding = bindingData ?: return
 
+        viewModel.accessToken.observe(viewLifecycleOwner, Observer{
+            callback?.onAuthCompleted()
+        })
+
         val authUri = Uri.parse("https://qiita.com")
             .buildUpon()
             .appendPath("api")
@@ -61,12 +80,6 @@ class LoginFragment : Fragment() {
         bindingData.webview.webViewClient = InnerWebViewClient(onObtainCode)
         bindingData.webview.settings.javaScriptEnabled = true
         bindingData.webview.loadUrl(authUri.toString())
-
-        viewModel.accessToken.observe(viewLifecycleOwner, Observer {
-            if (it != "") {
-                Log.d("デバッグ", it)
-            }
-        })
     }
 
     private class InnerWebViewClient(

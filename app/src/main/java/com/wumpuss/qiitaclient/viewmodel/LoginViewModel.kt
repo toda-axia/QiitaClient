@@ -15,8 +15,7 @@ import org.koin.core.inject
 
 class LoginViewModel(application: Application): ViewModel(), KoinComponent {
     private val authRepository: AuthRepository by inject()
-    val accessToken = MutableLiveData<String>("")
-    var token = ""
+    val accessToken = MutableLiveData<String>()
 
     fun requestAccessToken(
         clientId: String,
@@ -24,11 +23,13 @@ class LoginViewModel(application: Application): ViewModel(), KoinComponent {
         code: String
     ) {
         viewModelScope.launch {
-            accessToken.value = authRepository.token(
+            val token = authRepository.token(
                 clientId,
                 clientSecret,
                 code
             )
+
+            accessToken.value = token
         }
     }
 }
