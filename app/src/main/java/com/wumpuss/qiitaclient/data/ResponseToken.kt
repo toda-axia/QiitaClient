@@ -8,9 +8,3 @@ data class ResponseToken (
     val scopes: List<String>,
     val token: String
 )
-
-data class LoginRequest(
-    val client_id: String,
-    val client_secret: String,
-    val code: String
-) : Serializable

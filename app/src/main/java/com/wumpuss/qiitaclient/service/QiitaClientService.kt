@@ -1,5 +1,6 @@
 package com.wumpuss.qiitaclient.service
 
+import com.wumpuss.qiitaclient.data.LoginRequest
 import com.wumpuss.qiitaclient.data.QiitaInfo
 import com.wumpuss.qiitaclient.data.QiitaTag
 import com.wumpuss.qiitaclient.data.ResponseToken
@@ -15,12 +16,6 @@ interface QiitaClientService {
     suspend fun getAllTags(): Response<List<QiitaTag>>
     @GET("/api/v2/authenticated_user/items")
     suspend fun getMyPosts(@Header("Authorization") accessToken: String): Response<List<QiitaInfo>>
-
-//    @FormUrlEncoded
-//    @POST("/api/v2/access_tokens")
-//    suspend fun token(
-//        @Field("client_id") clientId: String,
-//        @Field("client_secret") clientSecret: String,
-//        @Field("code") code: String
-//    ): ResponseToken
+    @POST("/api/v2/access_tokens")
+    suspend fun token(@Body request: LoginRequest): ResponseToken
 }
