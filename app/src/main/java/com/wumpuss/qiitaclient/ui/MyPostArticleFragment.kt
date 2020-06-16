@@ -3,6 +3,7 @@ package com.wumpuss.qiitaclient.ui
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -25,7 +26,6 @@ class MyPostArticleFragment : Fragment() {
     private val qiitaAdapter: MyPostArticleAdapter by lazy {
         MyPostArticleAdapter(requireContext())
     }
-    private var token = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,14 +49,14 @@ class MyPostArticleFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        if (token == "") {
+        if (viewModel.token == "") {
             login_button.visibility = View.VISIBLE
             login_button.setOnClickListener {
                 val intent = Intent(requireContext(), LoginActivity::class.java)
                 startActivityForResult(intent, REQUEST_CODE_LOGIN)
             }
         } else {
-            viewModel.getMyPosts()
+            //viewModel.getMyPosts()
         }
     }
 
@@ -75,8 +75,9 @@ class MyPostArticleFragment : Fragment() {
         if (requestCode == REQUEST_CODE_LOGIN) {
             when(resultCode) {
                 Activity.RESULT_OK -> {
+                    Log.d("デバッグ", data!!.getStringExtra("INPUT_ACCESS_TOKEN"))
                     login_button.visibility = View.GONE
-                    viewModel.getMyPosts()
+                    viewModel.getMyPosts(data!!.getStringExtra("INPUT_ACCESS_TOKEN")!!)
                 }
                 else -> {
                     Toast.makeText(requireContext(), "ログインが完了しませんでした", Toast.LENGTH_LONG).show()

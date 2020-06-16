@@ -9,6 +9,7 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.wumpuss.qiitaclient.db.QiitaBookmarkDatabase
 import com.wumpuss.qiitaclient.repository.AuthRepository
+//import com.wumpuss.qiitaclient.repository.UserCredentialRepository
 import com.wumpuss.qiitaclient.service.QiitaClientService
 import com.wumpuss.qiitaclient.viewmodel.LoginViewModel
 import org.koin.android.ext.koin.androidContext

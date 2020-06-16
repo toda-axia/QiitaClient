@@ -27,8 +27,9 @@ class LoginActivity : AppCompatActivity(), LoginFragment.Callback {
 
     override fun onAuthCompleted() {
         Toast.makeText(this, "ログインが完了しました", Toast.LENGTH_SHORT).show()
-        intent.putExtra("INPUT_ACCESS_TOKEN", viewModel.accessToken.toString())
-        setResult(Activity.RESULT_OK)
+        Log.d("デバッグ2", viewModel.accessToken.toString())
+        intent.putExtra("INPUT_ACCESS_TOKEN", viewModel.accessToken.value)
+        setResult(Activity.RESULT_OK, intent)
         finish()
     }
 }

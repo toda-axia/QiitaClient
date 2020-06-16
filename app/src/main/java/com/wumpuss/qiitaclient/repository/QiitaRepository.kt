@@ -114,12 +114,12 @@ class QiitaRepository(private val context: Context): KoinComponent {
         return allTagList
     }
 
-    suspend fun getMyPosts(): List<QiitaInfo> {
+    suspend fun getMyPosts(accessToken: String): List<QiitaInfo> {
         var allMyPosts = emptyList<QiitaInfo>()
         runCatching {
             qiitaApiService.getMyPosts(
-                // accessToken = "Bearer ${userCredential.accessToken}"
-                accessToken = "Bearer e3967e7dc8acf74970396214ecda735a31ba4837"
+                accessToken = "Bearer $accessToken"
+                //accessToken = "Bearer e3967e7dc8acf74970396214ecda735a31ba4837"
             )
         }.onSuccess { response ->
             if (response.isSuccessful) {
