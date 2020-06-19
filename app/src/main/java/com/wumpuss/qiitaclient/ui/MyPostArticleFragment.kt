@@ -3,7 +3,6 @@ package com.wumpuss.qiitaclient.ui
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -46,23 +45,18 @@ class MyPostArticleFragment : Fragment() {
         bindViews()
     }
 
-    override fun onResume() {
-        super.onResume()
-
-        if (viewModel.token == "") {
-            login_button.visibility = View.VISIBLE
-            login_button.setOnClickListener {
-                val intent = Intent(requireContext(), LoginActivity::class.java)
-                startActivityForResult(intent, REQUEST_CODE_LOGIN)
-            }
-        } else {
-            //viewModel.getMyPosts()
-        }
-    }
-
     private fun bindViews() {
         viewModel.allMyPosts.observe(viewLifecycleOwner, Observer { list ->
             list?.let {
+                if (list.size == 0) {
+                    login_button.visibility = View.VISIBLE
+                    login_button.setOnClickListener {
+                        val intent = Intent(requireContext(), LoginActivity::class.java)
+                        startActivityForResult(intent, REQUEST_CODE_LOGIN)
+                    }
+                } else {
+                    login_button.visibility = View.GONE
+                }
                 qiitaAdapter.myPostArticleList = list
             }
             qiitaAdapter.notifyDataSetChanged()
@@ -75,9 +69,8 @@ class MyPostArticleFragment : Fragment() {
         if (requestCode == REQUEST_CODE_LOGIN) {
             when(resultCode) {
                 Activity.RESULT_OK -> {
-                    Log.d("デバッグ", data!!.getStringExtra("INPUT_ACCESS_TOKEN"))
                     login_button.visibility = View.GONE
-                    viewModel.getMyPosts(data!!.getStringExtra("INPUT_ACCESS_TOKEN")!!)
+                    viewModel.getMyPosts(data?.getStringExtra("INPUT_ACCESS_TOKEN")!!)
                 }
                 else -> {
                     Toast.makeText(requireContext(), "ログインが完了しませんでした", Toast.LENGTH_LONG).show()

@@ -3,7 +3,6 @@ package com.wumpuss.qiitaclient.ui
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,10 +14,7 @@ import androidx.lifecycle.Observer
 import com.wumpuss.qiitaclient.R
 import com.wumpuss.qiitaclient.databinding.FragmentLoginBinding
 import com.wumpuss.qiitaclient.viewmodel.LoginViewModel
-import com.wumpuss.qiitaclient.viewmodel.MainViewModel
 import org.koin.android.viewmodel.ext.android.sharedViewModel
-import org.koin.android.viewmodel.ext.android.viewModel
-
 
 class LoginFragment : Fragment() {
     companion object {

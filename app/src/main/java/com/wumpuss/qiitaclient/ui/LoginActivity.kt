@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.lifecycle.Observer
 import com.wumpuss.qiitaclient.R
 import com.wumpuss.qiitaclient.viewmodel.LoginViewModel
 import org.koin.android.viewmodel.ext.android.viewModel

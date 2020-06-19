@@ -11,7 +11,7 @@ class AuthRepository(private val context: Context): KoinComponent {
     private val qiitaApiService: QiitaClientService by inject()
     private var token: String = ""
 
-    suspend fun token(
+    suspend fun getToken(
         clientId: String,
         clientSecret: String,
         code: String
