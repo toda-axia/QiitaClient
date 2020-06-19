@@ -11,6 +11,7 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import com.wumpuss.qiitaclient.BuildConfig
 import com.wumpuss.qiitaclient.R
 import com.wumpuss.qiitaclient.databinding.FragmentLoginBinding
 import com.wumpuss.qiitaclient.viewmodel.LoginViewModel
@@ -39,8 +40,8 @@ class LoginFragment : Fragment() {
 
     private val onObtainCode = fun(code: String) {
         viewModel.requestAccessToken(
-            "d0a9a6eefab7ea557f0f2c95a678f2e913bf0c43",
-            "68d2c388302b56f04f381fc332c111fea8eb32a9",
+            BuildConfig.CLIENT_KEY,
+            BuildConfig.CLIENT_SECRET,
             code
         )
     }
@@ -69,9 +70,9 @@ class LoginFragment : Fragment() {
             .appendPath("v2")
             .appendPath("oauth")
             .appendPath("authorize")
-            .appendQueryParameter("client_id", "d0a9a6eefab7ea557f0f2c95a678f2e913bf0c43")
+            .appendQueryParameter("client_id", BuildConfig.CLIENT_KEY)
             .appendQueryParameter("scope", "read_qiita")
-            .appendQueryParameter("state", "68d2c388302b56f04f381fc332c111fea8eb32a9")
+            .appendQueryParameter("state", BuildConfig.CLIENT_SECRET)
             .build()
 
         bindingData.webview.webViewClient = InnerWebViewClient(onObtainCode)

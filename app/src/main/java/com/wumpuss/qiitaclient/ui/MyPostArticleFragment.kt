@@ -43,6 +43,10 @@ class MyPostArticleFragment : Fragment() {
         }
 
         bindViews()
+        login_button.setOnClickListener {
+            val intent = Intent(requireContext(), LoginActivity::class.java)
+            startActivityForResult(intent, REQUEST_CODE_LOGIN)
+        }
     }
 
     private fun bindViews() {

@@ -24,7 +24,6 @@ class LoginViewModel(app: Application): ViewModel(), KoinComponent {
                 clientSecret,
                 code
             )
-
             accessToken.value = token
         }
     }

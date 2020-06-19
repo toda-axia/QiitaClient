@@ -1,7 +1,6 @@
 package com.wumpuss.qiitaclient.repository
 
 import android.content.Context
-import android.util.Log
 import android.widget.Toast
 import com.wumpuss.qiitaclient.service.QiitaClientService
 import com.wumpuss.qiitaclient.R
@@ -55,7 +54,6 @@ class QiitaRepository(private val context: Context): KoinComponent {
         }.onFailure {
             Toast.makeText(context, context.getString(R.string.search_article_error), Toast.LENGTH_SHORT).show()
         }
-
         return returnSearchList
     }
 
@@ -118,14 +116,10 @@ class QiitaRepository(private val context: Context): KoinComponent {
         runCatching {
             qiitaApiService.getMyPosts(
                 accessToken = "Bearer $accessToken"
-                //accessToken = "Bearer e3967e7dc8acf74970396214ecda735a31ba4837"
             )
         }.onSuccess { response ->
             if (response.isSuccessful) {
                 allMyPosts= response.body()!!
-                allMyPosts.forEach {
-                    Log.d("デバッグ", it.toString())
-                }
             } else {
                 Toast.makeText(context, "アクセストークンが不正", Toast.LENGTH_SHORT).show()
             }

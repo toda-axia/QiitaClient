@@ -3,7 +3,6 @@ package com.wumpuss.qiitaclient.ui
 import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import com.wumpuss.qiitaclient.R
 import com.wumpuss.qiitaclient.viewmodel.LoginViewModel
@@ -26,7 +25,6 @@ class LoginActivity : AppCompatActivity(), LoginFragment.Callback {
 
     override fun onAuthCompleted() {
         Toast.makeText(this, "ログインが完了しました", Toast.LENGTH_SHORT).show()
-        Log.d("デバッグ2", viewModel.accessToken.toString())
         intent.putExtra("INPUT_ACCESS_TOKEN", viewModel.accessToken.value)
         setResult(Activity.RESULT_OK, intent)
         finish()

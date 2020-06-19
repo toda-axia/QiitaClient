@@ -16,6 +16,17 @@ android {
         versionCode 5
         versionName "0.5"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        def instanceProperties = project.rootProject.file('instance.properties')
+        if (!instanceProperties.exists()) {
+            instanceProperties.createNewFile()
+        }
+        def prop = new Properties()
+        prop.load(project.rootProject.file('instance.properties').newDataInputStream())
+        def CLIENT_KEY = prop.getProperty("client_key") ?: ""
+        def CLIENT_SECRET = prop.getProperty("client_secret") ?: ""
+        buildConfigField("String", "CLIENT_KEY", "\"${CLIENT_KEY}\"")
+        buildConfigField("String", "CLIENT_SECRET", "\"${CLIENT_SECRET}\"")
     }
 
     buildTypes {

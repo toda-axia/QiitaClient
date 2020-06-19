@@ -27,7 +27,6 @@ class MainViewModel(private val app: Application): ViewModel(), KoinComponent {
     var tag = ""
     var isBookmark = false
     var page = 0
-    var token = ""
 
     fun getArticle(tag: String?) {
         searchTag.value = tag
