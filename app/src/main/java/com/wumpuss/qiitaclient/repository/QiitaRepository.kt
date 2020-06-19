@@ -8,7 +8,6 @@ import com.wumpuss.qiitaclient.R
 import com.wumpuss.qiitaclient.data.QiitaBookmark
 import com.wumpuss.qiitaclient.data.QiitaInfo
 import com.wumpuss.qiitaclient.data.QiitaTag
-import com.wumpuss.qiitaclient.data.UserCredential
 import com.wumpuss.qiitaclient.db.QiitaBookmarkDatabase
 import org.koin.core.KoinComponent
 import org.koin.core.inject
