@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.wumpuss.qiitaclient.Pref
 import com.wumpuss.qiitaclient.repository.AuthRepository
 import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
@@ -25,6 +26,7 @@ class LoginViewModel(app: Application): ViewModel(), KoinComponent {
                 code
             )
             accessToken.value = token
+            Pref.accessToken = token
         }
     }
 }

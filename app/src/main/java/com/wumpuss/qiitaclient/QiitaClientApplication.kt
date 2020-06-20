@@ -29,6 +29,7 @@ class QiitaClientApplication: Application() {
     override fun onCreate() {
         super.onCreate()
         setupKoin()
+        Pref.init(applicationContext)
     }
 
     private fun setupKoin() {
