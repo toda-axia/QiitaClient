@@ -17,7 +17,7 @@ class InputSearchTagDialog : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val inputSearchTagDialogView = View.inflate(context, R.layout.fragment_input_search_tag_dialog, null)
-        val searchButton = inputSearchTagDialogView.findViewById(R.id.seach_button) as Button
+        val searchButton = inputSearchTagDialogView.findViewById(R.id.search_button) as Button
         val cancelButton = inputSearchTagDialogView.findViewById(R.id.cancel_button) as Button
         val tagText = inputSearchTagDialogView.findViewById(R.id.input_tag_text) as TextInputEditText
 
