@@ -29,4 +29,10 @@ class LoginViewModel(app: Application): ViewModel(), KoinComponent {
             Pref.accessToken = token
         }
     }
+
+    fun deleteToken(token: String) {
+        viewModelScope.launch {
+            authRepository.deleteToken(token)
+        }
+    }
 }

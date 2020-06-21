@@ -27,4 +27,14 @@ class AuthRepository(private val context: Context): KoinComponent {
 
         return token
     }
+
+    suspend fun deleteToken(token: String) {
+        runCatching {
+            qiitaApiService.deleteToken(token)
+        }.onSuccess {
+            Toast.makeText(context, "ログアウトしました。", Toast.LENGTH_SHORT).show()
+        }.onFailure { e ->
+            Toast.makeText(context, "ログアウトに失敗しました。", Toast.LENGTH_SHORT).show()
+        }
+    }
 }
