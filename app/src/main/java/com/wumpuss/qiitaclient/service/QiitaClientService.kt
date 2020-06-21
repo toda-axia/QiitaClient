@@ -18,4 +18,6 @@ interface QiitaClientService {
     suspend fun getMyPosts(@Header("Authorization") accessToken: String): Response<List<QiitaInfo>>
     @POST("/api/v2/access_tokens")
     suspend fun token(@Body request: LoginRequest): ResponseToken
+    @DELETE("/api/v2/access_tokens/{token}")
+    suspend fun deleteToken(@Path("token") token: String)
 }
