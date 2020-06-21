@@ -12,7 +12,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.LoginActivity"></activity>
+        <activity
+            android:name=".ui.LoginActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:host="${applicationId}"
+                    android:scheme="auth" />
+            </intent-filter>
+        </activity>
         <activity android:name=".ui.SearchResultActivity" />
         <activity android:name=".ui.QiitaContentActivity" />
         <activity android:name=".ui.MainActivity">

@@ -24,7 +24,15 @@ class MyPostArticleFragment : Fragment() {
 
     private val viewModel: MainViewModel by sharedViewModel()
     private val qiitaAdapter: MyPostArticleAdapter by lazy {
-        MyPostArticleAdapter(requireContext())
+        MyPostArticleAdapter(requireContext()) { bookmark ->
+            startActivity(QiitaContentActivity.callingIntent(
+                requireContext(),
+                bookmark.id,
+                bookmark.title,
+                bookmark.url,
+                bookmark.profileImage
+            ))
+        }
     }
 
     override fun onCreateView(
@@ -51,8 +59,8 @@ class MyPostArticleFragment : Fragment() {
 
         if (Pref.accessToken.isNotBlank()) {
             login_button.visibility = View.GONE
+            viewModel.getMyPosts(Pref.accessToken)
         }
-        viewModel.getMyPosts(Pref.accessToken)
     }
 
     private fun bindViews() {

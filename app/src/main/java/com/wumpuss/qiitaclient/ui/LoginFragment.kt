@@ -1,6 +1,7 @@
 package com.wumpuss.qiitaclient.ui
 
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -30,6 +31,14 @@ class LoginFragment : Fragment() {
 
     private var callback: Callback? = null
 
+    fun requestAccessToken(code: String) {
+        viewModel.requestAccessToken(
+            BuildConfig.CLIENT_KEY,
+            BuildConfig.CLIENT_SECRET,
+            code
+        )
+    }
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
@@ -38,13 +47,13 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private val onObtainCode = fun(code: String) {
-        viewModel.requestAccessToken(
-            BuildConfig.CLIENT_KEY,
-            BuildConfig.CLIENT_SECRET,
-            code
-        )
-    }
+//    private val onObtainCode = fun(code: String) {
+//        viewModel.requestAccessToken(
+//            BuildConfig.CLIENT_KEY,
+//            BuildConfig.CLIENT_SECRET,
+//            code
+//        )
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -75,22 +84,26 @@ class LoginFragment : Fragment() {
             .appendQueryParameter("state", BuildConfig.CLIENT_SECRET)
             .build()
 
-        bindingData.webview.webViewClient = InnerWebViewClient(onObtainCode)
-        bindingData.webview.settings.javaScriptEnabled = true
-        bindingData.webview.loadUrl(authUri.toString())
-    }
-
-    private class InnerWebViewClient(
-        val onObtainCode: (code: String) -> Unit
-    ) : WebViewClient() {
-        override fun onPageFinished(view: WebView?, url: String?) {
-            super.onPageFinished(view, url)
-            view ?: return
-
-            val code = Uri.parse(view.url).getQueryParameter("code")
-            code ?: return
-
-            onObtainCode(code)
+//        bindingData.webview.webViewClient = InnerWebViewClient(onObtainCode)
+//        bindingData.webview.settings.javaScriptEnabled = true
+//        bindingData.webview.loadUrl(authUri.toString())
+        val intent = Intent(Intent.ACTION_VIEW, authUri).apply {
+            addCategory(Intent.CATEGORY_BROWSABLE)
         }
+        startActivity(intent)
     }
+
+//    private class InnerWebViewClient(
+//        val onObtainCode: (code: String) -> Unit
+//    ) : WebViewClient() {
+//        override fun onPageFinished(view: WebView?, url: String?) {
+//            super.onPageFinished(view, url)
+//            view ?: return
+//
+//            val code = Uri.parse(view.url).getQueryParameter("code")
+//            code ?: return
+//
+//            onObtainCode(code)
+//        }
+//    }
 }
