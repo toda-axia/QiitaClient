@@ -19,7 +19,7 @@ import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class MyPostArticleFragment : Fragment() {
     companion object {
-        private const val REQUEST_CODE_LOGIN = 0x01
+        const val REQUEST_CODE_LOGIN = 0x01
     }
 
     private val viewModel: MainViewModel by sharedViewModel()
@@ -56,6 +56,15 @@ class MyPostArticleFragment : Fragment() {
             val intent = Intent(requireContext(), LoginActivity::class.java)
             startActivityForResult(intent, REQUEST_CODE_LOGIN)
         }
+
+//        if (Pref.accessToken.isNotBlank()) {
+//            login_button.visibility = View.GONE
+//            viewModel.getMyPosts(Pref.accessToken)
+//        }
+    }
+
+    override fun onResume() {
+        super.onResume()
 
         if (Pref.accessToken.isNotBlank()) {
             login_button.visibility = View.GONE

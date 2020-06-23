@@ -88,4 +88,8 @@ class MainViewModel(private val app: Application): ViewModel(), KoinComponent {
             allMyPosts.value = repository.getMyPosts(token)
         }
     }
+
+    fun deleteMyPosts() {
+        allMyPosts.value = emptyList()
+    }
 }
