@@ -56,11 +56,6 @@ class MyPostArticleFragment : Fragment() {
             val intent = Intent(requireContext(), LoginActivity::class.java)
             startActivityForResult(intent, REQUEST_CODE_LOGIN)
         }
-
-//        if (Pref.accessToken.isNotBlank()) {
-//            login_button.visibility = View.GONE
-//            viewModel.getMyPosts(Pref.accessToken)
-//        }
     }
 
     override fun onResume() {

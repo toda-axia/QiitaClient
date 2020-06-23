@@ -42,7 +42,6 @@ class SearchResultFragment : Fragment() {
         val lm = LinearLayoutManager(requireContext())
 
         tag_text.text = viewModel.tag
-        //search_result_list.adapter = qiitaAdapter
         search_result_list.apply {
             layoutManager = lm
             adapter = qiitaAdapter
