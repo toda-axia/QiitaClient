@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import com.wumpuss.qiitaclient.BuildConfig
+import android.widget.Toast
 import com.wumpuss.qiitaclient.Pref
 import com.wumpuss.qiitaclient.R
 import com.wumpuss.qiitaclient.utils.AnalyticsUtils
@@ -20,12 +20,7 @@ class MainActivity : AppCompatActivity(), ConfirmDeleteListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        viewModel.getRecentArticle()
-        viewModel.getAllTags()
-
-        if (BuildConfig.BUILD_TYPE.equals("release")) {
-            AnalyticsUtils.sendAppStartLog(baseContext)
-        }
+        AnalyticsUtils.sendAppStartLog(baseContext)
 
         fab.setOnClickListener {
             InputSearchTagDialog().show(supportFragmentManager, InputSearchTagDialog.TAG)
@@ -64,12 +59,22 @@ class MainActivity : AppCompatActivity(), ConfirmDeleteListener {
                 true
             }
             R.id.menu_logout -> {
+                Toast.makeText(this, "ログアウトしました。", Toast.LENGTH_SHORT).show()
                 Pref.accessToken = ""
                 viewModel.deleteMyPosts()
-
                 true
             }
             else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        viewModel.getRecentArticle()
+        viewModel.getAllTags()
+        if (Pref.accessToken.isNotBlank()) {
+            viewModel.getMyPosts(Pref.accessToken)
         }
     }
 }

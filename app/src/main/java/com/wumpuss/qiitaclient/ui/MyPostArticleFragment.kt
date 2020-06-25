@@ -10,8 +10,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.wumpuss.qiitaclient.Pref
-
 import com.wumpuss.qiitaclient.R
 import com.wumpuss.qiitaclient.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.fragment_my_post_article.*
@@ -55,15 +53,6 @@ class MyPostArticleFragment : Fragment() {
         login_button.setOnClickListener {
             val intent = Intent(requireContext(), LoginActivity::class.java)
             startActivityForResult(intent, REQUEST_CODE_LOGIN)
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        if (Pref.accessToken.isNotBlank()) {
-            login_button.visibility = View.GONE
-            viewModel.getMyPosts(Pref.accessToken)
         }
     }
 

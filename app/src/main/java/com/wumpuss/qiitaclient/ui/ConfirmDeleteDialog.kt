@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
-
 import com.wumpuss.qiitaclient.R
 import com.wumpuss.qiitaclient.databinding.FragmentConfirmDeleteDialogBinding
 import com.wumpuss.qiitaclient.viewmodel.MainViewModel
