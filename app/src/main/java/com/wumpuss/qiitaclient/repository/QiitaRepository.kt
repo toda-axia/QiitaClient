@@ -121,7 +121,7 @@ class QiitaRepository(private val context: Context): KoinComponent {
             if (response.isSuccessful) {
                 allMyPosts= response.body()!!
             } else {
-                Toast.makeText(context, "アクセストークンが不正", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "アクセストークンが不正です。一度ログアウトしてから、再ログインして下さい。", Toast.LENGTH_LONG).show()
             }
         }.onFailure {
             Toast.makeText(context, "自分の投稿の取得失敗", Toast.LENGTH_SHORT).show()

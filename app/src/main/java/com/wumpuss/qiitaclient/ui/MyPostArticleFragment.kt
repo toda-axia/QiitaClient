@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.wumpuss.qiitaclient.Pref
 import com.wumpuss.qiitaclient.R
 import com.wumpuss.qiitaclient.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.fragment_my_post_article.*
@@ -50,23 +51,40 @@ class MyPostArticleFragment : Fragment() {
         }
 
         bindViews()
-        login_button.setOnClickListener {
-            val intent = Intent(requireContext(), LoginActivity::class.java)
-            startActivityForResult(intent, REQUEST_CODE_LOGIN)
+
+        if (Pref.accessToken.isBlank()) {
+            login_button.visibility = View.VISIBLE
+            login_button.setOnClickListener {
+                val intent = Intent(requireContext(), LoginActivity::class.java)
+                startActivityForResult(intent, REQUEST_CODE_LOGIN)
+            }
         }
     }
 
     private fun bindViews() {
-        viewModel.allMyPosts.observe(viewLifecycleOwner, Observer { list ->
-            list?.let {
-                if (list.isEmpty()) {
+        viewModel.isAccessToken.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                if (it) {
+                    login_button.visibility = View.GONE
+                } else {
+                    no_my_post_text.visibility = View.GONE
                     login_button.visibility = View.VISIBLE
                     login_button.setOnClickListener {
                         val intent = Intent(requireContext(), LoginActivity::class.java)
                         startActivityForResult(intent, REQUEST_CODE_LOGIN)
                     }
+                }
+            }
+        })
+
+        viewModel.allMyPosts.observe(viewLifecycleOwner, Observer { list ->
+            list?.let {
+                if (list.isNotEmpty()) {
+                    no_my_post_text.visibility = View.GONE
                 } else {
-                    login_button.visibility = View.GONE
+                    if (Pref.accessToken.isNotBlank()) {
+                        no_my_post_text.visibility = View.VISIBLE
+                    }
                 }
                 qiitaAdapter.myPostArticleList = list
             }
@@ -80,7 +98,6 @@ class MyPostArticleFragment : Fragment() {
         if (requestCode == REQUEST_CODE_LOGIN) {
             when(resultCode) {
                 Activity.RESULT_OK -> {
-                    login_button.visibility = View.GONE
                     viewModel.getMyPosts(data?.getStringExtra("INPUT_ACCESS_TOKEN")!!)
                 }
                 else -> {
