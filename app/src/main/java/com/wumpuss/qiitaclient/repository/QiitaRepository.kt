@@ -1,6 +1,7 @@
 package com.wumpuss.qiitaclient.repository
 
 import android.content.Context
+import android.util.Log
 import android.widget.Toast
 import com.wumpuss.qiitaclient.service.QiitaClientService
 import com.wumpuss.qiitaclient.R
@@ -127,5 +128,36 @@ class QiitaRepository(private val context: Context): KoinComponent {
             Toast.makeText(context, "自分の投稿の取得失敗", Toast.LENGTH_SHORT).show()
         }
         return allMyPosts
+    }
+
+    suspend fun getUserId(accessToken: String): String {
+        var userId = ""
+        runCatching {
+            qiitaApiService.getUserId(
+                accessToken = "Bearer $accessToken"
+            )
+        }.onSuccess {
+            Log.d("デバッグ", it.userId)
+            userId =  it.userId
+        }.onFailure {
+            Toast.makeText(context, "ユーザーID取得失敗", Toast.LENGTH_LONG).show()
+        }
+        return userId
+    }
+
+    suspend fun getStockArticles(userId: String): List<QiitaInfo> {
+        var allStockArticles = emptyList<QiitaInfo>()
+        runCatching {
+            qiitaApiService.getStockArticles(userId)
+        }.onSuccess { response ->
+            if (response.isSuccessful) {
+                allStockArticles = response.body()!!
+            } else {
+                Toast.makeText(context, "ユーザーIDが正しくない可能性があります。", Toast.LENGTH_LONG).show()
+            }
+        }.onFailure {
+            Toast.makeText(context, "自分の投稿の取得失敗", Toast.LENGTH_SHORT).show()
+        }
+        return allStockArticles
     }
 }

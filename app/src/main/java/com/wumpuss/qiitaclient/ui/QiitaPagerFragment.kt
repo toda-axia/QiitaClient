@@ -31,7 +31,8 @@ class QiitaPagerFragment : Fragment() {
             getString(R.string.new_articles),
             getString(R.string.tag),
             getString(R.string.bookmark_articles),
-            getString(R.string.my_post)
+            getString(R.string.my_post),
+            "ストックした記事"
         )
 
         activity?.let {
@@ -54,6 +55,7 @@ class QiitaPagerAdapter(fa: FragmentActivity, private val tabs: List<String>) : 
             1 -> QiitaTagsFragment()
             2 -> BookmarkArticleFragment()
             3 -> MyPostArticleFragment()
+            4 -> StockArticlesFragment()
             else -> NewArticleFragment()
         }
     }

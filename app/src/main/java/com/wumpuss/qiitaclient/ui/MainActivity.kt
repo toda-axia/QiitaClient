@@ -75,6 +75,7 @@ class MainActivity : AppCompatActivity(), ConfirmDeleteListener {
         viewModel.getAllTags()
         if (Pref.accessToken.isNotBlank()) {
             viewModel.getMyPosts(Pref.accessToken)
+            viewModel.getUserId(Pref.accessToken)
         }
     }
 }

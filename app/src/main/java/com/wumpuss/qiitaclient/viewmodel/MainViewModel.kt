@@ -20,7 +20,9 @@ class MainViewModel(private val app: Application): ViewModel(), KoinComponent {
     val initialQiitaInfoList = MutableLiveData<List<QiitaInfo>>()
     val allTags = MutableLiveData<List<QiitaTag>>()
     val allMyPosts = MutableLiveData<List<QiitaInfo>>()
+    val allStockArticles = MutableLiveData<List<QiitaInfo>>()
     val isAccessToken = MutableLiveData<Boolean>()
+    val userId = MutableLiveData<String>()
     var id = ""
     var title = ""
     var url = ""
@@ -88,6 +90,19 @@ class MainViewModel(private val app: Application): ViewModel(), KoinComponent {
         viewModelScope.launch {
             isAccessToken.value = true
             allMyPosts.value = repository.getMyPosts(token)
+        }
+    }
+
+    fun getUserId(token: String) {
+        viewModelScope.launch {
+            userId.value = repository.getUserId(token)
+        }
+    }
+
+    fun getStockArticles(userId: String) {
+        viewModelScope.launch {
+            isAccessToken.value = true
+            allStockArticles.value = repository.getStockArticles(userId)
         }
     }
 

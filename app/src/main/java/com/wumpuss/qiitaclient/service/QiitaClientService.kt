@@ -1,9 +1,6 @@
 package com.wumpuss.qiitaclient.service
 
-import com.wumpuss.qiitaclient.data.LoginRequest
-import com.wumpuss.qiitaclient.data.QiitaInfo
-import com.wumpuss.qiitaclient.data.QiitaTag
-import com.wumpuss.qiitaclient.data.ResponseToken
+import com.wumpuss.qiitaclient.data.*
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -16,6 +13,10 @@ interface QiitaClientService {
     suspend fun getAllTags(): Response<List<QiitaTag>>
     @GET("/api/v2/authenticated_user/items")
     suspend fun getMyPosts(@Header("Authorization") accessToken: String): Response<List<QiitaInfo>>
+    @GET("/api/v2/authenticated_user")
+    suspend fun getUserId(@Header("Authorization")accessToken: String): QiitaUser
+    @GET("/api/v2/users/{userId}/stocks")
+    suspend fun getStockArticles(@Path("userId") userId: String): Response<List<QiitaInfo>>
     @POST("/api/v2/access_tokens")
     suspend fun token(@Body request: LoginRequest): ResponseToken
     @DELETE("/api/v2/access_tokens/{token}")
